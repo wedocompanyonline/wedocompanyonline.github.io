@@ -24,29 +24,37 @@
     </svg>
     <span class="brand"><b>We Do</b><small>dtp &amp; ele</small></span>
   </button>
-  <button class="talk" type="button">Let’s talk</button>
+  <div class="hbtns"><button class="hab" type="button">About<span class="lg"> us</span></button><button class="talk" type="button">Let’s talk</button><button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button></div>
 </header>
 
 <main class="scroller" tabindex="-1">
 
   <section class="hero dark" data-theme="dark" aria-label="Intro">
+    <!-- Hero background VIDEO (v2.7) - disabled for now. To switch back: remove these comment marks and delete the "hero-art" block below.
+    <video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="img/hero-poster.jpg" aria-hidden="true"><source src="video/hero.mp4" type="video/mp4"></video>
+    -->
+    <div class="hero-art" aria-hidden="true"><div class="hero-stage"><div class="hero-zoom"><img src="img/hero-bg.jpg" alt="" width="1821" height="864"><i class="hero-flare"></i><span class="hero-stars"></span></div></div><span class="hero-dust"></span><i class="meteor"></i></div>
     <div class="wrap">
       <div class="tag rv"><span class="code">EN</span></div>
       <div class="big rv" style="--d:.08s"><span id="word" lang="en">text</span></div>
       <h1 class="rv" style="--d:.16s">The text changes language.<br><span>The design stays.</span></h1>
-      <p class="lead rv" style="--d:.26s;max-width:30em">Multilingual DTP &amp; eLearning localization studio for translation agencies.</p>
+      <i class="hero-rule rv" style="--d:.22s" aria-hidden="true"></i>
+      <p class="lead rv" style="--d:.26s;max-width:23em">Multilingual DTP &amp; eLearning localization studio for translation agencies.</p>
     </div>
   </section>
 
-  <section class="light" data-theme="light" aria-label="DTP">
+  <section class="svc dtp light" data-theme="light" aria-label="DTP">
+    <div class="svc-main">
     <div class="wrap">
       <div class="col rv" style="--d:.05s">
         <p class="eyebrow">01 / Multilingual DTP</p>
-        <h2>Layouts that survive translation.</h2>
-        <p class="lead">InDesign, Illustrator and PDF work in CJK, RTL, Cyrillic and Thai. Text expansion handled; print-ready and accessible files out.</p>
-        <ul class="chips"><li>InDesign</li><li>Illustrator</li><li>Acrobat</li><li>PDF/UA</li></ul>
+        <h2>Layouts that speak every language.</h2>
+        <p class="lead narrow">Translation keeps the meaning; we keep the look. Flyers, brochures, manuals, presentations and PDFs, rebuilt page by page in Latin, Cyrillic, CJK and right-to-left scripts, aligned and true to the original. When the source file is gone, we recreate it.</p>
+        <ul class="chips"><li>Post-translation layout</li><li>PDF remediation</li><li>Accessibility</li><li>File recreation</li></ul>
       </div>
       <div class="vis rv" style="--d:.2s">
+        <img class="dtp-art" src="img/dtp-brochures.jpg" alt="The same brochure laid out in Spanish, Japanese and Arabic: Latin, CJK and right-to-left versions side by side" width="950" height="677">
+        <!-- Script grid (previous visual), hidden for now:
         <div class="glyphs" role="img" aria-label="Type specimen: Latin, Cyrillic, Japanese, Chinese, Korean, Arabic, Hebrew and Thai scripts">
           <div><span lang="en">Aa</span><small>Latn</small></div>
           <div><span lang="ru">Я</span><small>Cyrl</small></div>
@@ -56,60 +64,179 @@
           <div><span lang="ar">ع</span><small>Arab</small></div>
           <div><span lang="he">א</span><small>Hebr</small></div>
           <div><span lang="th">ก</span><small>Thai</small></div>
-        </div>
+        </div> -->
+      </div>
+    </div>
+    </div>
+    <div class="tail">
+      <div class="mini">
+        <h3 class="mini-label">What we do</h3>
+        <ol class="todo">
+            <li><b>Post-translation layout</b><span>Text expansion, line breaks, fonts and RTL mirroring, page by page.</span></li>
+            <li><b>Flyers &amp; brochures</b><span>Marketing pieces adapted without losing the design.</span></li>
+            <li><b>Manuals &amp; documents</b><span>Long files with tables, TOCs, indexes and cross-references.</span></li>
+            <li><b>Presentations &amp; Office files</b><span>Word and PowerPoint kept clean and editable.</span></li>
+            <li><b>File recreation</b><span>An editable file rebuilt from a PDF or a scan.</span></li>
+            <li><b>PDF remediation &amp; accessibility</b><span>Tagged, accessible PDFs.</span></li>
+        </ol>
+      </div>
+      <div class="mini">
+        <h3 class="mini-label">Tools</h3>
+        <dl class="tools">
+            <div><dt>Software</dt><dd>InDesign · Illustrator · Photoshop · Acrobat Pro · Word</dd></div>
+            <div><dt>Scripts</dt><dd>Latin · Cyrillic · CJK · Right-to-left</dd></div>
+        </dl>
+        <p class="tools-note"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 7.5L4 12l4.5 4.5M15.5 7.5L20 12l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Our own Python tools move text in and out of InDesign, Illustrator and Word files through XLIFF, so nothing is retyped.</span></p>
       </div>
     </div>
   </section>
 
-  <section class="dark" data-theme="dark" aria-label="eLearning">
+  <section class="svc elv dark" data-theme="dark" aria-label="eLearning and video">
+    <div class="svc-main">
     <div class="wrap">
       <div class="col rv" style="--d:.05s">
-        <p class="eyebrow">02 / eLearning</p>
-        <h2>eLearning, localized.</h2>
-        <p class="lead">Storyline, Rise and Captivate courses rebuilt in any language — layers, triggers, audio and captions included, QA’d before delivery.</p>
-        <ul class="chips"><li>Storyline 360</li><li>Rise 360</li><li>Captivate</li><li>SCORM / xAPI</li><li>XLIFF</li></ul>
+        <p class="eyebrow">02 / eLearning, audio + video</p>
+        <h2>eLearning,<br>audio&nbsp;&amp;&nbsp;video<br>localization.</h2>
+        <p class="lead narrow">Localizing a course means localizing every layer. Screens, interactions, narration, captions and the text inside graphics, rebuilt in Storyline, Rise and Captivate, then played end to end in every language before delivery.</p>
+        <!-- Tools line hidden for now:
+        <p class="fine">Built in Storyline 360, Rise 360, Captivate, Vyond, Premiere Pro and After Effects. Delivered as SCORM / xAPI packages, MP4 video and VTT / SRT captions.</p> -->
       </div>
       <div class="vis rv" style="--d:.2s">
-        <div class="btns" role="img" aria-label="The same Next button localized into English, Spanish, Japanese and Arabic, each fitting the same layout">
-          <div class="row"><b>EN</b><div class="bar" lang="en"><span class="track"><i></i></span><span class="pill">Next<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
-          <div class="row"><b>ES</b><div class="bar" lang="es"><span class="track"><i></i></span><span class="pill">Siguiente<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
-          <div class="row"><b>JA</b><div class="bar" lang="ja"><span class="track"><i></i></span><span class="pill">次へ<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
-          <div class="row"><b>AR</b><div class="bar" lang="ar" dir="rtl"><span class="track"><i></i></span><span class="pill">التالي<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+        <div class="lms" id="lms" role="img" aria-label="An eLearning course player with a presenter video, captions and a quiz, switching between English, Spanish, German and Japanese; behind it, an audio track and a course card in Arabic">
+          <div class="lms-in" aria-hidden="true">
+            <div class="lms-back">
+              <div class="lb-head"><span class="lb-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg></span><svg class="wave" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><rect x="0.0" y="16.5" width="2.4" height="7" rx="1.2"/><rect x="4.7" y="14.5" width="2.4" height="11" rx="1.2"/><rect x="9.4" y="15.5" width="2.4" height="9" rx="1.2"/><rect x="14.1" y="14.5" width="2.4" height="11" rx="1.2"/><rect x="18.8" y="12.0" width="2.4" height="16" rx="1.2"/><rect x="23.5" y="14.5" width="2.4" height="11" rx="1.2"/><rect x="28.2" y="16.5" width="2.4" height="7" rx="1.2"/><rect x="32.9" y="12.0" width="2.4" height="16" rx="1.2"/><rect x="37.6" y="11.5" width="2.4" height="17" rx="1.2"/><rect x="42.3" y="12.0" width="2.4" height="16" rx="1.2"/><rect x="47.0" y="11.5" width="2.4" height="17" rx="1.2"/><rect x="51.7" y="11.5" width="2.4" height="17" rx="1.2"/><rect x="56.4" y="4.0" width="2.4" height="32" rx="1.2"/><rect x="61.1" y="11.0" width="2.4" height="18" rx="1.2"/><rect x="65.8" y="13.0" width="2.4" height="14" rx="1.2"/><rect x="70.5" y="12.5" width="2.4" height="15" rx="1.2"/><rect x="75.2" y="6.5" width="2.4" height="27" rx="1.2"/><rect x="79.9" y="10.5" width="2.4" height="19" rx="1.2"/><rect x="84.6" y="13.0" width="2.4" height="14" rx="1.2"/><rect x="89.3" y="7.0" width="2.4" height="26" rx="1.2"/><rect x="94.0" y="9.0" width="2.4" height="22" rx="1.2"/><rect x="98.7" y="16.5" width="2.4" height="7" rx="1.2"/><rect x="103.4" y="12.0" width="2.4" height="16" rx="1.2"/><rect x="108.1" y="10.5" width="2.4" height="19" rx="1.2"/><rect x="112.8" y="14.5" width="2.4" height="11" rx="1.2"/><rect x="117.5" y="17.0" width="2.4" height="6" rx="1.2"/><rect x="122.2" y="13.0" width="2.4" height="14" rx="1.2"/><rect x="126.9" y="15.0" width="2.4" height="10" rx="1.2"/><rect x="131.6" y="15.0" width="2.4" height="10" rx="1.2"/><rect x="136.3" y="14.0" width="2.4" height="12" rx="1.2"/><rect x="141.0" y="13.0" width="2.4" height="14" rx="1.2"/><rect x="145.7" y="11.0" width="2.4" height="18" rx="1.2"/><rect x="150.4" y="15.0" width="2.4" height="10" rx="1.2"/><rect x="155.1" y="12.0" width="2.4" height="16" rx="1.2"/><rect x="159.8" y="11.0" width="2.4" height="18" rx="1.2"/><rect x="164.5" y="8.5" width="2.4" height="23" rx="1.2"/><rect x="169.2" y="12.5" width="2.4" height="15" rx="1.2"/><rect x="173.9" y="14.0" width="2.4" height="12" rx="1.2"/><rect x="178.6" y="11.5" width="2.4" height="17" rx="1.2"/><rect x="183.3" y="13.5" width="2.4" height="13" rx="1.2"/><rect x="188.0" y="11.5" width="2.4" height="17" rx="1.2"/><rect x="192.7" y="9.5" width="2.4" height="21" rx="1.2"/><rect x="197.4" y="7.0" width="2.4" height="26" rx="1.2"/><rect x="202.1" y="14.0" width="2.4" height="12" rx="1.2"/><rect x="206.8" y="12.5" width="2.4" height="15" rx="1.2"/><rect x="211.5" y="9.0" width="2.4" height="22" rx="1.2"/><rect x="216.2" y="11.5" width="2.4" height="17" rx="1.2"/><rect x="220.9" y="14.0" width="2.4" height="12" rx="1.2"/><rect x="225.6" y="11.5" width="2.4" height="17" rx="1.2"/><rect x="230.3" y="6.5" width="2.4" height="27" rx="1.2"/><rect x="235.0" y="12.0" width="2.4" height="16" rx="1.2"/><rect x="239.7" y="13.0" width="2.4" height="14" rx="1.2"/><rect x="244.4" y="11.0" width="2.4" height="18" rx="1.2"/><rect x="249.1" y="11.0" width="2.4" height="18" rx="1.2"/><rect x="253.8" y="14.5" width="2.4" height="11" rx="1.2"/><rect x="258.5" y="16.5" width="2.4" height="7" rx="1.2"/><rect x="263.2" y="14.0" width="2.4" height="12" rx="1.2"/><rect x="267.9" y="12.5" width="2.4" height="15" rx="1.2"/><rect x="272.6" y="13.5" width="2.4" height="13" rx="1.2"/><rect x="277.3" y="14.0" width="2.4" height="12" rx="1.2"/><rect x="282.0" y="10.5" width="2.4" height="19" rx="1.2"/><rect x="286.7" y="14.5" width="2.4" height="11" rx="1.2"/><rect x="291.4" y="13.0" width="2.4" height="14" rx="1.2"/><rect x="296.1" y="10.5" width="2.4" height="19" rx="1.2"/></svg><span class="lb-time">00:12 / 01:24</span></div>
+              <div class="lb-body"><img src="img/presenter.jpg" alt=""><span class="lb-pill"></span></div>
+            </div>
+            <div class="lms-ar" dir="rtl" lang="ar">
+              <div class="la-img"><img src="img/card-earth.jpg" alt=""><span class="la-dots"><i></i><i></i><i></i></span></div>
+              <b>تعلّم بلا حدود</b><i class="la-rule"></i><span class="la-btn">متابعة <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M10 7l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+            <div class="lms-player" lang="en">
+              <div class="lp-head"><b data-l="title">Module 1: Getting Started</b><span class="lp-tabs"><i class="on">EN</i><i>ES</i><i>DE</i><i>JA</i></span><span class="lp-sep"></span><span class="lp-res" data-l="res">RESOURCES</span></div>
+              <div class="lp-body">
+                <div class="lp-video"><img src="img/presenter.jpg" alt=""><span class="lp-cc" data-l="cc">Let’s explore the key concepts together.</span></div>
+                <div class="lp-quiz">
+                  <p class="lp-q" data-l="q">What is localization?</p><i class="lp-rule"></i>
+                  <ul><li class="on"><i></i><span data-l="a1">Adapting content for a different language and culture.</span></li><li><i></i><span data-l="a2">Translating every word literally.</span></li><li><i></i><span data-l="a3">Changing the course design.</span></li></ul>
+                  <span class="lp-submit" data-l="sub">Submit</span>
+                </div>
+              </div>
+              <div class="lp-ctrl"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 010 6M18 6.5a7.5 7.5 0 010 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="lp-time">00:12 / 01:24</span><span class="lp-track"><i></i></span><span class="lp-ccbtn">CC</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3M5.5 5.5l2.1 2.1M16.4 16.4l2.1 2.1M5.5 18.5l2.1-2.1M16.4 7.6l2.1-2.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+          </div>
         </div>
+      </div>
+      <!-- Visual hidden for now (monitor + phone, v2.3). Remove these comment marks to bring it back:
+      <div class="vis rv" style="--d:.2s">
+        <div class="sync" id="sync" role="img" aria-label="The original English video on a desktop monitor, and the same video on a phone, localized into Spanish, German, Japanese, Arabic and Korean, playing in sync">
+          <div class="desk">
+            <div class="monitor">
+              <div class="mscreen">
+                <div class="vid">
+                  <div class="vtop"><span class="vlang">EN · Original</span><span class="vtc">00:00:12.480</span></div>
+                  <div class="vscene" lang="en"><small>OST</small><b class="ost">Safety first</b><i class="vline"></i></div>
+                  <div class="vcc" lang="en"><span><small>CC</small><span class="cc">Check the connection before you start.</span></span></div>
+                </div>
+                <div class="mbar"><span class="track"><i></i></span><span class="pill">Next<svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              </div>
+              <div class="neck"></div><div class="mbase"></div>
+            </div>
+            <div class="phone"><div class="screen"><div class="vid">
+              <div class="vtop"><span class="vlang">ES</span><span class="vtc">00:00:12.480</span></div>
+              <div class="vscene" lang="es" dir="ltr"><small>OST</small><b class="ost">La seguridad primero</b><i class="vline"></i></div>
+              <div class="vcc" lang="es" dir="ltr"><span><small>CC</small><span class="cc">Revisa la conexión antes de empezar.</span></span></div>
+            </div><div class="btns">
+              <div class="row on"><b>ES</b><div class="bar" lang="es"><span class="track"><i></i></span><span class="pill">Siguiente<svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+              <div class="row"><b>DE</b><div class="bar" lang="de"><span class="track"><i></i></span><span class="pill">Weiter<svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+              <div class="row"><b>JA</b><div class="bar" lang="ja"><span class="track"><i></i></span><span class="pill">次へ<svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+              <div class="row"><b>AR</b><div class="bar" lang="ar" dir="rtl"><span class="track"><i></i></span><span class="pill">التالي<svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+              <div class="row"><b>KO</b><div class="bar" lang="ko"><span class="track"><i></i></span><span class="pill">다음<svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div></div>
+            </div></div></div>
+          </div>
+        </div>
+      </div>
+      -->
+    </div>
+    </div>
+    <div class="tail">
+      <div class="mini">
+        <h3 class="mini-label">What we do</h3>
+        <ol class="todo">
+            <li><b>Course localization</b><span>Storyline, Rise and Captivate courses, from XLIFF to published output.</span></li>
+            <li><b>Screens &amp; interactions</b><span>Buttons, layers, states and triggers fitted to the new text.</span></li>
+            <li><b>Audio editing &amp; text-to-speech</b><span>Narration generated, edited and retimed to the animation.</span></li>
+            <li><b>Transcription &amp; subtitles</b><span>Transcripts, VTT and SRT files timed to the audio, sidecar or burned in.</span></li>
+            <li><b>Video &amp; animation</b><span>Vyond and After Effects scenes retimed and re-texted.</span></li>
+            <li><b>Graphics</b><span>Text inside images and screenshots recreated.</span></li>
+        </ol>
+      </div>
+      <div class="mini">
+        <h3 class="mini-label">Tools</h3>
+        <dl class="tools">
+            <div><dt>Authoring</dt><dd>Articulate Storyline 360 · Rise · Adobe Captivate</dd></div>
+            <div><dt>Media</dt><dd>Vyond · Premiere Pro · After Effects · Photoshop</dd></div>
+            <div><dt>Formats</dt><dd>XLIFF · VTT · SRT</dd></div>
+        </dl>
+        <p class="tools-note"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 7.5L4 12l4.5 4.5M15.5 7.5L20 12l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Our own Python tools compare course structure, reinject earlier translations into updated courses and time captions to audio.</span></p>
       </div>
     </div>
   </section>
 
-  <section class="light" data-theme="light" aria-label="Video and subtitles">
+  <section class="svc about light" data-theme="light" aria-label="About">
+    <div class="svc-main">
     <div class="wrap">
       <div class="col rv" style="--d:.05s">
-        <p class="eyebrow">03 / Video &amp; subtitles</p>
-        <h2>Every line, on&nbsp;time.</h2>
-        <p class="lead">Localized voice-over synced to the animation, captions timed to the frame, subtitles burned in or delivered as VTT&nbsp;/&nbsp;SRT.</p>
-        <ul class="chips"><li>Vyond</li><li>Premiere Pro</li><li>After Effects</li><li>VTT / SRT</li></ul>
+        <p class="eyebrow">03 / About us</p>
+        <h2>Who We Are.<br><span class="soft">What We Do.</span></h2>
+        <p class="lead">We Do is a boutique DTP and eLearning localization studio for translation agencies. Founder-led, powered by our own Python tools, and working behind your brand.</p>
       </div>
-      <div class="vis rv" style="--d:.2s">
-        <div class="frame" role="img" aria-label="Video frame with a Spanish subtitle cue from 00:00:12.480 to 00:00:15.200">
-          <span class="tc">00:00:12.480 --&gt; 00:00:15.200</span>
-          <span class="lang">ES</span>
-          <div class="cap"><span lang="es">Cada línea, a tiempo.</span></div>
-          <div class="prog"><i></i></div>
-        </div>
+      <div class="vis rv" style="--d:.15s">
+        <div class="stage" aria-hidden="true"><span class="orbit"><i></i><i></i><i></i></span><span class="shade"></span><img class="big-pet" src="img/mascota.png" alt="" width="160" height="160"></div>
+      </div>
+      <!-- Pillars (previous design) now live in the "What you get" mini-section below:
+      <ul class="pillars rv" style="--d:.3s">
+          <li><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.5"/><path d="M3.5 20c.6-3.6 3.2-5.5 6.5-5.5 1.3 0 2.5.3 3.5.9"/><path d="M15.5 18.5l2 2 4-4.5"/></svg><h3><mark>Senior hands</mark></h3><p>Senior specialists on every file, from first check to final QA.</p></li>
+          <li><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 7.5L4 12l4.5 4.5M15.5 7.5L20 12l-4.5 4.5M13.5 5l-3 14"/></svg><h3><mark>Our own tools</mark></h3><p>Python automation we build in-house for XLIFF, Storyline and file prep.</p></li>
+          <li><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8-7.5 9.5-4.3-1.5-7.5-4.9-7.5-9.5V6L12 3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg><h3><mark>Behind your brand</mark></h3><p>White-label by default. Your client, your NDA, your name on the delivery.</p></li>
+        </ul> -->
+    </div>
+    </div>
+    <div class="tail">
+      <div class="mini">
+        <h3 class="mini-label">What you get</h3>
+        <ol class="todo four">
+          <li><b>Senior hands</b><span>A specialist on every file, from first check to final QA.</span></li>
+          <li><b>Own tools</b><span>Python utilities for XLIFF, structure checks and file prep.</span></li>
+          <li><b>Behind your brand</b><span>White-label by default; your client sees your name.</span></li>
+          <li><b>Direct line</b><span>You talk to the specialist who knows your file.</span></li>
+        </ol>
+      </div>
+      <div class="mini">
+        <h3 class="mini-label">How a project runs</h3>
+        <ol class="todo four">
+          <li><b>Send</b><span>Source files and the translation, in any format.</span></li>
+          <li><b>Check</b><span>Fonts, scripts, links and structure reviewed before we start.</span></li>
+          <li><b>Build</b><span>Layout, course or video rebuilt in the new language.</span></li>
+          <li><b>Verify</b><span>Checked in the final format, in every language. Then it’s yours.</span></li>
+        </ol>
       </div>
     </div>
   </section>
 
   <section class="contact mint" data-theme="mint" aria-label="Contact">
     <div class="wrap rv" style="--d:.05s">
-      <p class="eyebrow">For translation agencies</p>
+      <p class="eyebrow">Start a project</p>
       <h2 class="huge">Let’s talk.</h2>
-      <p class="lead" style="max-width:31em">XLIFF in, XLIFF out. Functional and visual QA before every delivery. 13+ years in localization, working remote from Santa Fe, Argentina (GMT-3).</p>
+      <p class="lead" style="max-width:31em">Any file, any format, any language. Tell us what you need. We Do the rest.</p>
       <div class="ctas">
+        <button class="cta" type="button" data-chat>Start a chat</button>
         <a class="cta solid" href="mailto:YOUR_EMAIL">Email us<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="cta" href="https://www.linkedin.com/in/YOUR_PROFILE" target="_blank" rel="noopener">LinkedIn</a>
+        <!-- LinkedIn button disabled for now (uncomment to bring it back):
+        <a class="cta" href="https://www.linkedin.com/in/maximiliano-meneses-76617916b/" target="_blank" rel="noopener">LinkedIn</a> -->
       </div>
     </div>
-    <p class="foot">© 2026 We Do — dtp &amp; ele</p>
+    <p class="foot">© 2026 We Do — dtp &amp; ele · Santa Fe, Argentina</p>
   </section>
 
 </main>
@@ -117,15 +244,42 @@
 <nav aria-label="Sections">
   <button type="button" aria-label="Go to Intro"><i></i></button>
   <button type="button" aria-label="Go to DTP"><i></i></button>
-  <button type="button" aria-label="Go to eLearning"><i></i></button>
-  <button type="button" aria-label="Go to Video and subtitles"><i></i></button>
+  <button type="button" aria-label="Go to eLearning and video"><i></i></button>
+  <button type="button" aria-label="Go to About"><i></i></button>
   <button type="button" aria-label="Go to Contact"><i></i></button>
   <span class="count" aria-hidden="true">01 / 05</span>
 </nav>
 
 <div class="pet">
   <div class="bubble" aria-hidden="true"><span>Scroll</span><svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-  <button class="mascot" type="button" aria-label="Next section"><img src="img/mascota.png" alt="" width="160" height="160"></button>
+  <button class="mascot" type="button" aria-label="Chat with WD, the We Do assistant" aria-expanded="false" aria-controls="chat"><img src="img/mascota.png" alt="" width="160" height="160"></button>
+</div>
+
+<div id="menu" class="menu" aria-label="Site menu" hidden>
+  <ul>
+    <li><button type="button" data-go="0"><small>01</small>Home</button></li>
+    <li><button type="button" data-go="1"><small>02</small>Multilingual DTP</button></li>
+    <li><button type="button" data-go="2"><small>03</small>eLearning, audio &amp; video</button></li>
+    <li><button type="button" data-go="3"><small>04</small>About us</button></li>
+    <li><button type="button" data-go="4"><small>05</small>Contact</button></li>
+  </ul>
+  <div class="menu-foot"><button type="button" class="menu-chat" data-chat>Start a chat</button><a class="menu-mail" href="mailto:YOUR_EMAIL">Email us</a></div>
+</div>
+
+<div id="chat" class="chat" role="dialog" aria-labelledby="chat-title" hidden>
+  <div class="chat-head">
+    <img src="img/mascota.png" alt="" width="36" height="36">
+    <div><b id="chat-title">WD</b><small><i></i>We Do assistant</small></div>
+    <button class="chat-close" type="button" aria-label="Close chat"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  </div>
+  <div class="chat-log" aria-live="polite"></div>
+  <div class="chat-quick"></div>
+  <form class="chat-form" hidden novalidate>
+    <label class="sr" for="chat-email">Your email</label>
+    <input id="chat-email" type="email" required placeholder="you@company.com" autocomplete="email">
+    <button type="submit" aria-label="Send"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </form>
+  <p class="chat-note">No spam, no commitment. Just a hello.</p>
 </div>
 
 <script src="js/main.js"></script>
