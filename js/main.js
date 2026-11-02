@@ -1,4 +1,4 @@
-/* We Do — web v3.7 — 2026-10-27 */
+/* We Do — web v3.8 — 2026-10-27 */
 (function () {
   var sc = document.querySelector('.scroller');
   var secs = Array.prototype.slice.call(sc.querySelectorAll('section'));
@@ -14,11 +14,13 @@
   var menuItems = Array.prototype.slice.call(menu.querySelectorAll('[data-go]'));
   var last = secs.length - 1, active = -1, touched = false, restT;
 
-  function go(i) { sc.scrollTo({ top: secs[i].offsetTop, behavior: 'smooth' }); }
+  var tops = [];
+  function measure() { tops = secs.map(function (s) { return s.offsetTop; }); }
+  function go(i) { measure(); sc.scrollTo({ top: tops[i], behavior: 'smooth' }); }
   // Sections can be taller than the screen (service slides + their tails): find the active one by position
   function current() {
     var y = sc.scrollTop + sc.clientHeight * 0.45, idx = 0;
-    secs.forEach(function (s, k) { if (s.offsetTop <= y) idx = k; });
+    for (var k = 0; k < tops.length; k++) if (tops[k] <= y) idx = k;
     return idx;
   }
 
@@ -46,16 +48,23 @@
     bubble();
   }
 
-  sc.addEventListener('scroll', function () {
+  // Scroll work runs once per frame, with cached block positions (no layout reads per event)
+  var ticking = false, moving = false;
+  function onFrame() {
+    ticking = false;
     var h = sc.clientHeight || 1;
     set(current());
-    hdr.classList.toggle('solid', sc.scrollTop - secs[active].offsetTop > 8);
-    bar.style.width = (sc.scrollTop / Math.max(1, sc.scrollHeight - h) * 100) + '%';
+    bar.style.transform = 'scaleX(' + Math.min(1, sc.scrollTop / Math.max(1, sc.scrollHeight - h)).toFixed(4) + ')';
     if (!touched) { touched = true; bubble(); }
-    document.body.classList.add('moving');
+    if (!moving) { moving = true; document.body.classList.add('moving'); }
     clearTimeout(restT);
-    restT = setTimeout(function () { document.body.classList.remove('moving'); }, 420);
-  }, { passive: true });
+    restT = setTimeout(function () { moving = false; document.body.classList.remove('moving'); }, 420);
+  }
+  sc.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onFrame); } }, { passive: true });
+  measure();
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
 
   dots.forEach(function (d, k) { d.addEventListener('click', function () { go(k); }); });
   document.querySelector('.logo').addEventListener('click', function () { go(0); });
@@ -299,6 +308,19 @@
   menu.querySelector('.menu-chat').addEventListener('click', function () { closeMenu(); });
   menu.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(true); });
   document.addEventListener('click', function (e) { if (!menu.hidden && !menu.contains(e.target) && !menuBtn.contains(e.target)) closeMenu(); });
+
+  // Mini-sections fade in softly as they scroll into view (content is never hidden without JS or with reduced motion)
+  var minis = Array.prototype.slice.call(document.querySelectorAll('.mini'));
+  if ('IntersectionObserver' in window && !calm && minis.length) {
+    minis.forEach(function (m) {
+      Array.prototype.forEach.call(m.querySelectorAll('.mini-label, .todo li, .tools > div, .tools-note'), function (el, k) { el.style.setProperty('--i', k); });
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { root: sc, threshold: 0.12 });
+    document.documentElement.classList.add('reveal-on');
+    minis.forEach(function (m) { io.observe(m); });
+  }
 
   requestAnimationFrame(function () { set(0); });
   sc.focus({ preventScroll: true });
