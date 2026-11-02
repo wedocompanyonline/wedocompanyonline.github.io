@@ -1,4 +1,4 @@
-/* We Do — web v3.8 — 2026-10-27 */
+/* We Do — web v3.10 — 2026-10-27 */
 :root{--ink:#16181D;--paper:#F4F5F3;--mint:#5EC4B0;--teal:#1A8A78;--teal-d:#136A5C;--mute-d:#A3ADAA;--mute-l:#565E5B;--mute-m:#1F3D37;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --fg:#fff;--muted:var(--mute-d);--accent:var(--mint);--line:rgba(255,255,255,.24);--dot:rgba(255,255,255,.32);--bub-bg:#fff;--bub-fg:var(--ink);--count-bg:var(--mint);--count-fg:var(--ink);--cta-bg:var(--mint);--cta-fg:var(--ink)}
@@ -74,12 +74,9 @@ body{--cap-bg:rgba(22,24,29,.72);--cap-line:rgba(255,255,255,.09)}
 body[data-theme=light]{--cap-bg:rgba(244,245,243,.78);--cap-line:rgba(22,24,29,.08)}
 body[data-theme=mint]{--cap-bg:rgba(94,196,176,.8);--cap-line:rgba(22,24,29,.1)}
 body.hero-on{--cap-bg:rgba(5,6,8,.5);--cap-line:rgba(255,255,255,.1)}
-header .logo,header .hbtns{background:var(--cap-bg);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 0 0 1px var(--cap-line);border-radius:999px;transition:background .4s ease,box-shadow .4s ease}
-header .logo{padding:5px 18px 5px 14px}
-header .hbtns{padding:5px;gap:4px}
-header .hbtns .hab,header .hbtns .menu-btn{border-color:transparent}
+header .logo{padding:5px 0}
 header .hbtns .hab:hover,header .hbtns .menu-btn:hover{background:var(--cap-line)}
-@media (max-width:400px){header .logo{padding:5px 12px 5px 10px;gap:9px}header .logo svg{width:54px}.brand{padding-left:9px}.logo b{font-size:14px}header .hbtns .talk{padding:0 12px}}
+@media (max-width:400px){header .logo{gap:9px}header .logo svg{width:54px}.brand{padding-left:9px}.logo b{font-size:14px}header .hbtns .talk{padding:0 12px}}
 /* Mini-sections: soft staggered fade-in */
 .reveal-on .mini .mini-label,.reveal-on .mini .todo li,.reveal-on .mini .tools>div,.reveal-on .mini .tools-note{opacity:0;transform:translateY(14px);transition:opacity .55s ease calc(var(--i,0) * 55ms),transform .7s cubic-bezier(.2,.8,.2,1) calc(var(--i,0) * 55ms)}
 .reveal-on .mini.in .mini-label,.reveal-on .mini.in .todo li,.reveal-on .mini.in .tools>div,.reveal-on .mini.in .tools-note{opacity:1;transform:none}
