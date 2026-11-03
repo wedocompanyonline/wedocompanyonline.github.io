@@ -1,4 +1,4 @@
-/* We Do — web v3.10 — 2026-10-27 */
+/* We Do — web v3.13 — 2026-11-03 */
 (function () {
   var sc = document.querySelector('.scroller');
   var secs = Array.prototype.slice.call(sc.querySelectorAll('section'));
@@ -323,5 +323,11 @@
   }
 
   requestAnimationFrame(function () { set(0); });
+  // Hero v3.13: the lamp switches on once, on arrival; the headline appears in its light
+  var lampHero = document.querySelector('.hero-lamp') ? document.querySelector('.hero') : null;
+  if (lampHero) requestAnimationFrame(function () {
+    lampHero.classList.add('lamp-go', 'lamp-intro');
+    setTimeout(function () { lampHero.classList.remove('lamp-intro'); }, 2600);
+  });
   sc.focus({ preventScroll: true });
 })();

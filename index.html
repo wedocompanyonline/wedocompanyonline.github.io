@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@800&family=Noto+Sans+KR:wght@800&family=Noto+Sans+Arabic:wght@700;800&family=Noto+Sans+Hebrew:wght@800&family=Noto+Sans+Thai:wght@800&display=swap">
 <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body data-theme="light">
 <div class="progress" aria-hidden="true"></div>
 
 <header>
@@ -29,17 +29,22 @@
 
 <main class="scroller" tabindex="-1">
 
-  <section class="hero dark" data-theme="dark" aria-label="Intro">
+  <section class="hero light" data-theme="light" aria-label="Intro">
     <!-- Hero background VIDEO (v2.7) - disabled for now. To switch back: remove these comment marks and delete the "hero-art" block below.
     <video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="img/hero-poster.jpg" aria-hidden="true"><source src="video/hero.mp4" type="video/mp4"></video>
     -->
+    <!-- Hero v2.8–v3.12: Earth image with real stars, star dust and shooting star (kept for reference).
+         To switch back: restore this block, set the section to class="hero dark" data-theme="dark" and remove the "hero-lamp" block below.
     <div class="hero-art" aria-hidden="true"><div class="hero-stage"><div class="hero-zoom"><img src="img/hero-bg.jpg" alt="" width="1821" height="864"><i class="hero-flare"></i><span class="hero-stars"></span></div></div><span class="hero-dust"></span><i class="meteor"></i></div>
+    -->
+    <!-- Hero v3.13: product-style photo — the lamp switches on and lights the headline -->
+    <div class="hero-lamp" aria-hidden="true"><div class="lamp-stage"><div class="lamp-zoom"><img src="img/hero-lamp.jpg" alt="" width="1376" height="768"><i class="lamp-off"><i class="lamp-lens"></i></i></div></div></div>
     <div class="wrap">
       <div class="tag rv"><span class="code">EN</span></div>
       <div class="big rv" style="--d:.08s"><span id="word" lang="en">text</span></div>
       <h1 class="rv" style="--d:.16s">The text changes language.<br><span>The design stays.</span></h1>
       <i class="hero-rule rv" style="--d:.22s" aria-hidden="true"></i>
-      <p class="lead rv" style="--d:.26s;max-width:23em">Multilingual DTP &amp; eLearning localization studio for translation agencies.</p>
+      <p class="lead rv" style="--d:.26s;max-width:23em">Professional multilingual DTP &amp; eLearning localization studio for translation agencies.</p>
     </div>
   </section>
 
@@ -190,9 +195,12 @@
         <p class="eyebrow">03 / About us</p>
         <h2>Who We Are.<br><span class="soft">What We Do.</span></h2>
         <p class="lead">We Do is a boutique DTP and eLearning localization studio for translation agencies. Founder-led, powered by our own Python tools, and working behind your brand.</p>
+        <ul class="stats"><li><b>13+ years</b><span>Localization experience</span></li><li><b>1,000+</b><span>Projects delivered</span></li><li><b>Global</b><span>Languages &amp; scripts</span></li></ul>
       </div>
       <div class="vis rv" style="--d:.15s">
-        <div class="stage" aria-hidden="true"><span class="orbit"><i></i><i></i><i></i></span><span class="shade"></span><img class="big-pet" src="img/mascota.png" alt="" width="160" height="160"></div>
+        <div class="about-art"><img src="img/about-mascot.jpg" alt="The We Do mascot, a small black robot with the WD logo, hugging a globe" width="810" height="585"><i class="eye-glow" aria-hidden="true"></i></div>
+        <!-- Previous visual (orbit + flat mascot), hidden for now:
+        <div class="stage" aria-hidden="true"><span class="orbit"><i></i><i></i><i></i></span><span class="shade"></span><img class="big-pet" src="img/mascota.png" alt="" width="160" height="160"></div> -->
       </div>
       <!-- Pillars (previous design) now live in the "What you get" mini-section below:
       <ul class="pillars rv" style="--d:.3s">
