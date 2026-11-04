@@ -1,4 +1,4 @@
-/* We Do — web v3.30 — 2026-11-04 */
+/* We Do — web v3.31 — 2026-11-04 */
 :root{--ink:#16181D;--paper:#F4F5F3;--mint:#5EC4B0;--teal:#1A8A78;--teal-d:#136A5C;--mute-d:#A3ADAA;--mute-l:#565E5B;--mute-m:#1F3D37;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --fg:#fff;--muted:var(--mute-d);--accent:var(--mint);--line:rgba(255,255,255,.24);--dot:rgba(255,255,255,.32);--bub-bg:#fff;--bub-fg:var(--ink);--count-bg:var(--mint);--count-fg:var(--ink);--cta-bg:var(--mint);--cta-fg:var(--ink)}
@@ -614,4 +614,6 @@ body.foot-in .pet{transform:translateY(calc(-1 * var(--foot-h,0px)))}
 .dark .tools-note .touch{color:#7FB0FF;text-decoration-color:currentColor}
 .tools-note .touch:hover,.dark .tools-note .touch:hover{color:inherit}
 /* v3.30 — phones only: the lamp comes in big from the top right, so its light falls on the headline (base fades out below) */
-@media (max-width:640px){.lamp-stage{--lh:74vh;height:var(--lh);width:calc(var(--lh) * 1.7917);top:calc(70px - var(--lh) * .08);bottom:auto;right:auto;left:calc(66vw - var(--lh) * 1.111);-webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent);mask-image:linear-gradient(to bottom,#000 70%,transparent)}}
+/* v3.30 (lamp cropped at the bottom): @media (max-width:640px){.lamp-stage{--lh:74vh;height:var(--lh);width:calc(var(--lh) * 1.7917);top:calc(70px - var(--lh) * .08);bottom:auto;right:auto;left:calc(66vw - var(--lh) * 1.111);-webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent);mask-image:linear-gradient(to bottom,#000 70%,transparent)}} */
+/* v3.31 — phones only: the whole lamp, top right, its light on the headline; soft fade only at the image edges */
+@media (max-width:640px){.lamp-stage{--lh:min(46vh,108vw);height:var(--lh);width:calc(var(--lh) * 1.7917);top:calc(70px - var(--lh) * .11);bottom:auto;right:auto;left:calc(99vw - var(--lh) * 1.46);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 10%,#000 93%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 10%,#000 93%,transparent 100%)}}
