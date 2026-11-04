@@ -1,4 +1,4 @@
-/* We Do — web v3.27 — 2026-11-04 */
+/* We Do — web v3.29 — 2026-11-04 */
 (function () {
   var sc = document.querySelector('.scroller');
   var secs = Array.prototype.slice.call(sc.querySelectorAll('section'));
@@ -464,6 +464,16 @@
   }
 
   requestAnimationFrame(function () { set(0); paintTheme(); });
+  // v3.29: when the footer is on screen, the floating WD button rises above it
+  var legal = document.querySelector('footer.legal');
+  if (legal && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        document.body.style.setProperty('--foot-h', Math.round(e.intersectionRect.height) + 'px');
+        document.body.classList.toggle('foot-in', e.isIntersecting);
+      });
+    }, { root: sc, threshold: [0, .25, .5, .75, 1] }).observe(legal);
+  }
   // v3.16: each block reveals its content once, as soon as it scrolls into view (and stays visible)
   if ('IntersectionObserver' in window) {
     var seenIO = new IntersectionObserver(function (es) {

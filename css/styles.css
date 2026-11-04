@@ -1,4 +1,4 @@
-/* We Do — web v3.27 — 2026-11-04 */
+/* We Do — web v3.29 — 2026-11-04 */
 :root{--ink:#16181D;--paper:#F4F5F3;--mint:#5EC4B0;--teal:#1A8A78;--teal-d:#136A5C;--mute-d:#A3ADAA;--mute-l:#565E5B;--mute-m:#1F3D37;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --fg:#fff;--muted:var(--mute-d);--accent:var(--mint);--line:rgba(255,255,255,.24);--dot:rgba(255,255,255,.32);--bub-bg:#fff;--bub-fg:var(--ink);--count-bg:var(--mint);--count-fg:var(--ink);--cta-bg:var(--mint);--cta-fg:var(--ink)}
@@ -582,3 +582,24 @@ header .hbtns .lang-btn:hover,header .hbtns .lang-btn[aria-expanded=true]{backgr
   .reveal-on .mini .steps.five li::after{transform:scaleY(0)}
   .reveal-on .mini.in .steps.five li::after{transform:none}
 }
+/* v3.28 — Tools columns follow the "What we do" grid above (3 equal columns, same gaps):
+   Software wraps at the width of column 1, Scripts / Media start where column 2 starts */
+.tools{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.6vh,28px) clamp(24px,3vw,48px)}
+@media (max-width:900px){.tools{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.tools{grid-template-columns:1fr}}
+/* v3.28 — the number sits on the same line as its title ("01  Post-translation layout") */
+.todo li::before{content:none}
+.todo b::before{content:counter(todo,decimal-leading-zero);display:inline-block;margin-right:10px;font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.06em;color:var(--teal-d);vertical-align:.16em}
+.dark .todo b::before{color:var(--mint)}
+/* v3.28 — step descriptions as tidy, squared blocks */
+@media (min-width:901px){.steps.five li span{text-align:justify;text-align-last:center;-webkit-hyphens:auto;hyphens:auto}}
+/* v3.29 — "Get in touch" is an email link and never breaks across lines */
+.tools-note .touch{white-space:nowrap;color:inherit;font-weight:600;text-decoration:underline;text-decoration-color:var(--teal);text-decoration-thickness:1.5px;text-underline-offset:3px}
+.dark .tools-note .touch{text-decoration-color:var(--mint)}
+.tools-note .touch:hover{color:var(--teal-d)}
+.dark .tools-note .touch:hover{color:var(--mint)}
+/* v3.29 — footer always in two lines: copyright, then rights + policies; on phones the WD button moves up so it never covers it */
+.legal{flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:14px calc(clamp(64px,8vw,140px) + 64px) 14px clamp(24px,8vw,140px)}
+.legal-links{display:flex;flex-wrap:wrap;align-items:center}
+@media (max-width:640px){.legal{padding:12px 24px;font-size:11px}.legal i{margin:0 7px}}
+body.foot-in .pet{transform:translateY(calc(-1 * var(--foot-h,0px)))}
