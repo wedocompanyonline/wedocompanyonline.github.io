@@ -1,4 +1,4 @@
-/* We Do — web v3.13 — 2026-11-03 */
+/* We Do — web v3.27 — 2026-11-04 */
 :root{--ink:#16181D;--paper:#F4F5F3;--mint:#5EC4B0;--teal:#1A8A78;--teal-d:#136A5C;--mute-d:#A3ADAA;--mute-l:#565E5B;--mute-m:#1F3D37;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --fg:#fff;--muted:var(--mute-d);--accent:var(--mint);--line:rgba(255,255,255,.24);--dot:rgba(255,255,255,.32);--bub-bg:#fff;--bub-fg:var(--ink);--count-bg:var(--mint);--count-fg:var(--ink);--cta-bg:var(--mint);--cta-fg:var(--ink)}
@@ -6,9 +6,11 @@ body[data-theme=light]{--fg:var(--ink);--muted:var(--mute-l);--accent:var(--teal
 body[data-theme=mint]{--fg:var(--ink);--muted:var(--mute-m);--accent:var(--ink);--line:rgba(22,24,29,.32);--dot:rgba(22,24,29,.32);--bub-bg:var(--ink);--bub-fg:#fff;--count-bg:var(--ink);--count-fg:var(--mint);--cta-bg:var(--ink);--cta-fg:#fff}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--ink)}
-body{font-family:Montserrat,'Noto Sans JP','Noto Sans KR','Noto Sans Arabic','Noto Sans Hebrew','Noto Sans Thai',system-ui,sans-serif;color:#fff;-webkit-font-smoothing:antialiased;overflow:hidden}
+body{font-family:Montserrat,'Noto Sans JP','Noto Sans KR','Noto Sans Arabic','Noto Sans Hebrew','Noto Sans Thai','Noto Sans','Noto Sans Devanagari','Noto Sans SC',system-ui,sans-serif;color:#fff;-webkit-font-smoothing:antialiased;overflow:hidden}
 .scroller{scroll-behavior:smooth;position:fixed;inset:0;overflow-x:hidden;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;overscroll-behavior:contain;outline:none}
 .scroller::-webkit-scrollbar{display:none}
+/* v3.16: continuous scroll — the site reads as one long page (snapping per block switched off; it was scroll-snap-type:y mandatory above) */
+.scroller{scroll-snap-type:none}
 section{position:relative;min-height:100vh;min-height:100dvh;box-sizing:border-box;display:flex;align-items:center;padding:104px clamp(64px,8vw,140px) 104px clamp(24px,8vw,140px);overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always}
 .dark{background:var(--ink);color:#fff}.light{background:var(--paper);color:var(--ink)}.mint{background:var(--mint);color:var(--ink)}
 .wrap{width:100%;max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(28px,5vw,96px)}
@@ -16,6 +18,7 @@ section{position:relative;min-height:100vh;min-height:100dvh;box-sizing:border-b
 .vis{flex:1 1 320px;min-width:0;display:flex;justify-content:center}
 .rv{opacity:0;transform:translateY(32px);transition:opacity .6s ease var(--d,0s),transform .8s cubic-bezier(.2,.8,.2,1) var(--d,0s)}
 section.on .rv{opacity:1;transform:none}
+section.seen .rv{opacity:1;transform:none}
 .eyebrow{margin:0;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
 .dark .eyebrow{color:var(--mint)}.light .eyebrow{color:var(--teal-d)}.mint .eyebrow{color:var(--mute-m)}
 h1,h2{margin:0;font-weight:800}
@@ -42,6 +45,30 @@ section.svc{height:auto;display:block;padding:0;overflow:visible}
 .tail{padding:0 clamp(64px,8vw,140px) clamp(48px,8vh,96px) clamp(24px,8vw,140px)}
 .mini{max-width:1180px;margin:0 auto;min-height:30vh;box-sizing:border-box;padding:clamp(24px,4vh,44px) 0;border-top:1px solid rgba(22,24,29,.12)}
 .dark .mini{border-top-color:rgba(255,255,255,.12)}
+/* v3.14 — compact blocks: each service slide takes only the room it needs (was min-height:100vh, padding 104px top and bottom),
+   and its "What we do" panel rises over it like a sheet while you scroll (sticky slide + layered tail; JS adds .stack when the slide fits the screen) */
+.svc-main{flex-direction:column;justify-content:center}
+@media (min-width:641px){.svc-main{min-height:0;padding-top:clamp(92px,12vh,124px);padding-bottom:clamp(48px,7vh,72px)}}
+/* v3.17: slides a little taller again — about 88% of the screen, content centred (v3.14–v3.16 had min-height:0) */
+@media (min-width:641px){.svc-main{min-height:88vh}}
+/* v3.15 panels (rounded, shadowed), kept for reference:
+.tail{position:relative;z-index:1;padding-top:clamp(6px,1.4vh,16px);border-radius:clamp(22px,2.6vw,40px) clamp(22px,2.6vw,40px) 0 0;background:#fff;box-shadow:0 -1px 0 rgba(22,24,29,.05),0 -26px 50px -34px rgba(22,24,29,.35)} 
+.dark .tail{background:#1D2027;box-shadow:0 -1px 0 rgba(255,255,255,.06),0 -26px 50px -30px rgba(0,0,0,.85)} */
+/* v3.16: flat, minimal panels — a slightly different tone and a hairline, no shadows, no rounded corners */
+.tail{position:relative;padding-top:clamp(6px,1.4vh,16px);background:#FAFAF9;border-top:1px solid rgba(22,24,29,.07)}
+.dark .tail{background:#1A1C22;border-top-color:rgba(255,255,255,.07)}
+.tail .mini:first-child{border-top:0}
+/* v3.15: pinned slide + rising panel turned off — blocks scroll normally again. Kept for reference:
+section.svc.stack .svc-main{position:sticky;top:0;transform-origin:50% 0;transform:scale(calc(1 - var(--cov,0) * .06));opacity:calc(1 - var(--cov,0) * .55)} */
+/* Ribbon of "layout" in many languages — FUTURE IDEA, not on the page for now (markup commented out in index.html) */
+.langs{width:100vw;margin:clamp(14px,2.4vh,24px) 0 clamp(4px,1vh,10px) calc(-1 * clamp(24px,8vw,140px));overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.langs-track{display:flex;width:max-content;margin:0;padding:6px 0 14px;list-style:none;animation:langs 60s linear infinite}
+.langs:hover .langs-track{animation-play-state:paused}
+.langs li{flex:none;display:flex;align-items:center;gap:10px;margin-right:12px;padding:11px 18px;border-radius:14px;background:var(--paper);border:1px solid rgba(22,24,29,.06);font-size:16px;font-weight:700;line-height:1.2;color:var(--ink);white-space:nowrap}
+.langs li i{font-style:normal;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;padding:3px 7px;border-radius:6px;background:rgba(26,138,120,.1);color:var(--teal-d)}
+@keyframes langs{to{transform:translateX(-50%)}}
+@media (max-width:640px){.langs li{font-size:14px;padding:9px 14px}}
+@media (prefers-reduced-motion:reduce){.langs-track{animation:none}.langs{overflow-x:auto}}
 .mini-label{margin:0 0 clamp(16px,2.4vh,26px);font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-d)}
 .dark .mini-label{color:var(--mint)}
 .todo{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.6vh,28px) clamp(24px,3vw,48px);counter-reset:todo}
@@ -60,6 +87,9 @@ section.svc{height:auto;display:block;padding:0;overflow:visible}
 .dark .tools-note{color:var(--mute-d)}
 .tools-note svg{flex:none;margin-top:2px;color:var(--teal)}
 .dark .tools-note svg{color:var(--mint)}
+/* v3.18: closing line of the Tools panels — "<*>" bullet in the accent green */
+.tools-note .star{flex:none;font-family:var(--mono);font-weight:700;letter-spacing:.02em;color:var(--teal)}
+.dark .tools-note .star{color:var(--mint)}
 .todo.four{grid-template-columns:repeat(4,minmax(0,1fr))}
 @media (max-width:900px){.todo,.todo.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){
@@ -78,8 +108,8 @@ header .logo{padding:5px 0}
 header .hbtns .hab:hover,header .hbtns .menu-btn:hover{background:var(--cap-line)}
 @media (max-width:400px){header .logo{gap:9px}header .logo svg{width:54px}.brand{padding-left:9px}.logo b{font-size:14px}header .hbtns .talk{padding:0 12px}}
 /* Mini-sections: soft staggered fade-in */
-.reveal-on .mini .mini-label,.reveal-on .mini .todo li,.reveal-on .mini .tools>div,.reveal-on .mini .tools-note{opacity:0;transform:translateY(14px);transition:opacity .55s ease calc(var(--i,0) * 55ms),transform .7s cubic-bezier(.2,.8,.2,1) calc(var(--i,0) * 55ms)}
-.reveal-on .mini.in .mini-label,.reveal-on .mini.in .todo li,.reveal-on .mini.in .tools>div,.reveal-on .mini.in .tools-note{opacity:1;transform:none}
+.reveal-on .mini .mini-label,.reveal-on .mini .team-list li,.reveal-on .mini .todo li,.reveal-on .mini .tools>div,.reveal-on .mini .tools-note{opacity:0;transform:translateY(14px);transition:opacity .55s ease calc(var(--i,0) * 55ms),transform .7s cubic-bezier(.2,.8,.2,1) calc(var(--i,0) * 55ms)}
+.reveal-on .mini.in .mini-label,.reveal-on .mini.in .team-list li,.reveal-on .mini.in .todo li,.reveal-on .mini.in .tools>div,.reveal-on .mini.in .tools-note{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.scroller{scroll-behavior:auto}}
 /* About (provisional v3.11): mascot render + stats row */
 .about .lead{color:var(--ink)}
@@ -275,6 +305,8 @@ h1 span{color:var(--mute-d)}
 .dtp .col{flex:0 1 560px}
 .dtp .vis{flex:1 1 440px}
 .dtp-art{display:block;width:100%;max-width:860px;height:auto;margin-left:auto;animation:floaty 7s ease-in-out infinite}
+/* v3.15: DTP slide mirrored on desktop: brochures on the left, text on the right (phones keep text first) */
+@media (min-width:641px){.dtp .wrap{flex-direction:row-reverse}.dtp-art{margin-left:0;margin-right:auto}}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 @media (prefers-reduced-motion:reduce){.dtp-art{animation:none}}
 @media (max-width:640px){.dtp-art{max-width:250px;margin:0 auto}.dtp .col{gap:12px}}
@@ -335,7 +367,10 @@ h1 span{color:var(--mute-d)}
 @media (prefers-reduced-motion:reduce){.lp-video img{animation:none}}
 /* About us */
 h2 .soft{color:var(--mute-l)}
-.about h2{font-size:clamp(34px,4.6vw,66px)}
+/* v3.17: .about h2{font-size:clamp(34px,4.6vw,66px)} */
+/* v3.18: a touch smaller so the new title keeps exactly 3 lines ("The people behind" on one line) */
+.about h2{font-size:clamp(34px,4.3vw,61px)}
+@media (max-width:640px){.about h2{font-size:min(34px,calc((100vw - 88px) / 10))}}
 .pillars{list-style:none;margin:0;padding:0;width:100%;max-width:680px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,2.4vw,36px)}
 .pillars li{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
 .pillars svg{color:var(--teal)}
@@ -457,3 +492,93 @@ button.cta{font-family:inherit;cursor:pointer;background:transparent}
 .chat-note{margin:0;padding:0 14px 12px;font-size:11px;color:var(--mute-l)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}.msg.typing i{animation:none}}
+
+/* v3.19 — About: "Meet Our Team" (flat, no shadows). Each circle shows a square photo; without one it shows the initials */
+/* v3.19: .team-title{text-align:center} */
+/* v3.20: big centred headline over the team; the small green label stays left-aligned like the other panels */
+.team-head{margin:0 0 clamp(22px,3.6vh,40px);text-align:center;font-size:clamp(30px,3.6vw,52px);font-weight:800;line-height:1.05;letter-spacing:-.025em;color:var(--ink)}
+.team-list{list-style:none;margin:0 auto;padding:clamp(6px,1.4vh,14px) 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,4vw,56px);max-width:1040px;text-align:center}
+.team-list li{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.avatar{position:relative;display:block;width:clamp(96px,11vw,150px);aspect-ratio:1;margin-bottom:10px;border-radius:50%;overflow:hidden;background:#E3EAE8}
+.avatar::before{content:attr(data-initials);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(24px,2.6vw,36px);font-weight:800;letter-spacing:.02em;color:var(--teal-d)}
+.avatar img{position:relative;display:block;width:100%;height:100%;object-fit:cover}
+.team-list b{font-size:16px;font-weight:700;line-height:1.3;color:var(--ink)}
+.team-list .role{max-width:20em;font-size:14px;line-height:1.45;color:var(--mute-l)}
+@media (max-width:640px){.team-list{gap:12px}.avatar{width:min(88px,24vw);margin-bottom:6px}.avatar::before{font-size:22px}.team-list b{font-size:13px}.team-list .role{font-size:12px;line-height:1.4}}
+
+/* v3.21 — About "How a project runs" as a timeline: green circles with an icon, joined by a green line (left to right; top to bottom on phones) */
+.steps{--ic:46px;--cg:clamp(24px,3vw,48px);column-gap:var(--cg)}
+.steps li{position:relative}
+.step-ic{order:-1;position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:var(--ic);height:var(--ic);margin-bottom:10px;border-radius:50%;background:var(--teal);color:#fff}
+.steps li::after{content:"";position:absolute;top:calc(var(--ic) / 2 - 1px);left:calc(var(--ic) + 10px);right:calc(10px - var(--cg));height:2px;border-radius:2px;background:var(--mint);transform-origin:0 50%}
+.steps li:last-child::after{display:none}
+.reveal-on .mini .steps li::after{transform:scaleX(0);transition:transform .7s cubic-bezier(.2,.8,.2,1) calc(var(--i,0) * 55ms + 250ms)}
+.reveal-on .mini.in .steps li::after{transform:none}
+@media (min-width:641px) and (max-width:900px){.steps li:nth-child(2n)::after{display:none}}
+@media (max-width:640px){
+  .steps{row-gap:22px}
+  .steps li{padding-left:calc(var(--ic) + 16px);min-height:var(--ic)}
+  .step-ic{position:absolute;left:0;top:0;margin:0}
+  .steps li::after{top:calc(var(--ic) + 6px);bottom:-16px;left:calc(var(--ic) / 2 - 1px);right:auto;width:2px;height:auto;transform-origin:50% 0}
+  .reveal-on .mini .steps li::after{transform:scaleY(0)}
+}
+@media (prefers-reduced-motion:reduce){.reveal-on .mini .steps li::after{transform:none}}
+
+/* v3.22 — the big intro word: a typeface per script (Greek and Devanagari are new; Chinese uses the Simplified Chinese face) */
+#word:lang(el){font-family:'Noto Sans',Montserrat,sans-serif}
+#word:lang(hi){font-family:'Noto Sans Devanagari',sans-serif;letter-spacing:0}
+#word:lang(zh){font-family:'Noto Sans SC','Noto Sans JP',sans-serif}
+#word:lang(ja){font-family:'Noto Sans JP',sans-serif}
+#word:lang(ko){font-family:'Noto Sans KR',sans-serif}
+#word:lang(ar){font-family:'Noto Sans Arabic',sans-serif;letter-spacing:0}
+#word:lang(he){font-family:'Noto Sans Hebrew',sans-serif;letter-spacing:0}
+#word:lang(th){font-family:'Noto Sans Thai',sans-serif;letter-spacing:0}
+/* v3.22 — legal strip at the very bottom of Contact (replaces the small .foot line) */
+.legal{position:absolute;left:0;right:0;bottom:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 24px;margin:0;padding:13px calc(clamp(64px,8vw,140px) + 64px) 13px clamp(24px,8vw,140px);background:var(--ink);color:#A3ADAA;font-size:12px;line-height:1.5;letter-spacing:.02em}
+.legal p{margin:0}
+.legal i{font-style:normal;margin:0 9px;opacity:.6}
+@media (max-width:640px){.legal{flex-direction:column;align-items:flex-start;padding:12px 96px 12px 24px;font-size:11px}}
+.hero .wrap{min-width:0} /* v3.22: a long word never widens the intro column */
+/* v3.23: the legal strip is now its own footer after Contact (no longer laid over the slide) */
+.legal{position:static}
+/* v3.24: Tools closing line — plain "*" bullet with more room above (was "<*>" at the normal note spacing) */
+.tools-note.closing{margin-top:clamp(30px,4.6vh,48px)}
+/* v3.24: Contact is a little taller than the screen (≈109vh) with its content centred in the visible part,
+   so arriving shows only the green; the dark footer appears when you keep scrolling */
+.contact{min-height:109vh;min-height:109dvh;padding-bottom:calc(9vh + 104px)}
+.tools-note.closing .star{font-size:1.4em;line-height:1.05}
+/* v3.26: language selector cancelled for now — markup commented out in index.html; these styles stay for when it comes back.
+   v3.25 — language selector: a line globe before "About us"; a small flat menu (no shadows) */
+.lang{position:relative;display:flex}
+.lang-btn{width:44px;height:44px;padding:0;border-radius:50%;border:1px solid var(--line);background:none;color:var(--fg);display:flex;align-items:center;justify-content:center;transition:color .4s,border-color .4s,background .4s}
+header .hbtns .lang-btn:hover,header .hbtns .lang-btn[aria-expanded=true]{background:var(--cap-line)}
+.lang-menu{position:absolute;top:calc(100% + 8px);right:0;z-index:6;min-width:184px;margin:0;padding:6px;list-style:none;border-radius:14px;background:#fff;border:1px solid rgba(22,24,29,.14);pointer-events:auto}
+.lang-menu[hidden]{display:none}
+.lang-menu button,.menu-lang-list button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:40px;padding:8px 12px;border:0;border-radius:9px;background:none;color:var(--ink);font-family:inherit;font-size:14px;font-weight:600;text-align:left;cursor:pointer}
+.lang-menu button:hover,.lang-menu button:focus-visible{background:var(--paper);outline:none}
+.lang-menu button svg,.menu-lang-list button svg{flex:none;color:var(--teal)}
+.menu-lang{display:none;margin-top:6px;padding:8px 2px 0;border-top:1px solid rgba(22,24,29,.08)}
+.menu-lang-label{margin:0 0 2px;padding:0 12px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-d)}
+.menu-lang-list{list-style:none;margin:0;padding:0}
+.menu .menu-lang-list button{font-size:15px}
+/* where the header gets tight, the globe moves into the 3-line menu */
+@media (max-width:600px){.lang{display:none}.menu-lang{display:block}}
+/* v3.27 — five steps. Desktop: five equal columns, each step centred, the green line runs circle to circle;
+   the team row uses the same five columns (members in columns 2–4) so the middle frame sits right above step 3.
+   Tablet and phone: vertical timeline. */
+.steps.five{grid-template-columns:repeat(5,minmax(0,1fr))}
+@media (min-width:901px){
+  .steps.five li{align-items:center;text-align:center}
+  .steps.five li::after{left:calc(50% + var(--ic) / 2 + 8px);right:auto;width:calc(100% + var(--cg) - var(--ic) - 16px)}
+  .team .team-list{max-width:none;grid-template-columns:repeat(5,minmax(0,1fr));column-gap:clamp(24px,3vw,48px)}
+  .team .team-list li:first-child{grid-column:2}
+}
+@media (max-width:900px){
+  .steps.five{grid-template-columns:1fr;row-gap:22px}
+  .steps.five li{padding-left:calc(var(--ic) + 16px);min-height:var(--ic)}
+  .steps.five .step-ic{position:absolute;left:0;top:0;margin:0}
+  .steps.five li::after{display:block;top:calc(var(--ic) + 6px);bottom:-16px;left:calc(var(--ic) / 2 - 1px);right:auto;width:2px;height:auto;transform-origin:50% 0}
+  .steps.five li:last-child::after{display:none}
+  .reveal-on .mini .steps.five li::after{transform:scaleY(0)}
+  .reveal-on .mini.in .steps.five li::after{transform:none}
+}

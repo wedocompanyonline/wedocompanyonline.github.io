@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" href="img/mascota.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@800&family=Noto+Sans+KR:wght@800&family=Noto+Sans+Arabic:wght@700;800&family=Noto+Sans+Hebrew:wght@800&family=Noto+Sans+Thai:wght@800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@800&family=Noto+Sans+KR:wght@800&family=Noto+Sans+Arabic:wght@700;800&family=Noto+Sans+Hebrew:wght@800&family=Noto+Sans+Thai:wght@800&family=Noto+Sans:wght@800&family=Noto+Sans+Devanagari:wght@800&family=Noto+Sans+SC:wght@800&display=swap">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body data-theme="light">
@@ -24,7 +24,7 @@
     </svg>
     <span class="brand"><b>We Do</b><small>dtp &amp; ele</small></span>
   </button>
-  <div class="hbtns"><button class="hab" type="button">About<span class="lg"> us</span></button><button class="talk" type="button">Let’s talk</button><button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button></div>
+  <div class="hbtns"><!-- v3.26: language selector cancelled for now (hidden). To bring it back, put this markup back before "About us": <div class="lang"><button class="lang-btn" type="button" aria-label="Language" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></svg></button><ul id="lang-menu" class="lang-menu" role="menu" aria-label="Language" hidden></ul></div> --><button class="hab" type="button">About<span class="lg"> us</span></button><button class="talk" type="button">Let’s talk</button><button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button></div>
 </header>
 
 <main class="scroller" tabindex="-1">
@@ -41,7 +41,7 @@
     <div class="hero-lamp" aria-hidden="true"><div class="lamp-stage"><div class="lamp-zoom"><img src="img/hero-lamp.jpg" alt="" width="1376" height="768"><i class="lamp-off"><i class="lamp-lens"></i></i></div></div></div>
     <div class="wrap">
       <div class="tag rv"><span class="code">EN</span></div>
-      <div class="big rv" style="--d:.08s"><span id="word" lang="en">text</span></div>
+      <div class="big rv" style="--d:.08s"><span id="word" lang="en">We Do</span></div>
       <h1 class="rv" style="--d:.16s">The text changes language.<br><span>The design stays.</span></h1>
       <i class="hero-rule rv" style="--d:.22s" aria-hidden="true"></i>
       <p class="lead rv" style="--d:.26s;max-width:23em">Professional multilingual DTP &amp; eLearning localization studio for translation agencies.</p>
@@ -54,8 +54,10 @@
       <div class="col rv" style="--d:.05s">
         <p class="eyebrow">01 / Multilingual DTP</p>
         <h2>Layouts that speak every language.</h2>
-        <p class="lead narrow">Translation keeps the meaning; we keep the look. Flyers, brochures, manuals, presentations and PDFs, rebuilt page by page in Latin, Cyrillic, CJK and right-to-left scripts, aligned and true to the original. When the source file is gone, we recreate it.</p>
-        <ul class="chips"><li>Post-translation layout</li><li>PDF remediation</li><li>Accessibility</li><li>File recreation</li></ul>
+        <!-- v3.17 text (replaced in v3.18): <p class="lead narrow">Translation keeps the meaning; we keep the look. Flyers, brochures, manuals, presentations and PDFs, rebuilt page by page in Latin, Cyrillic, CJK and right-to-left scripts, aligned and true to the original. When the source file is gone, we recreate it.</p> -->
+        <p class="lead narrow">A translated document is more than its words. Translation keeps the meaning and we keep the look. Flyers, brochures, manuals, presentations and PDFs, formatted page by page in Latin, Cyrillic, CJK and right-to-left scripts, aligned and true to the original. If the source file is gone, we recreate it, faithful to the source, style included.</p>
+        <!-- v3.15: chips removed from the slide (they live in "What we do" below):
+        <ul class="chips"><li>Post-translation layout</li><li>PDF remediation</li><li>Accessibility</li><li>File recreation</li></ul> -->
       </div>
       <div class="vis rv" style="--d:.2s">
         <img class="dtp-art" src="img/dtp-brochures.jpg" alt="The same brochure laid out in Spanish, Japanese and Arabic: Latin, CJK and right-to-left versions side by side" width="950" height="677">
@@ -74,6 +76,27 @@
     </div>
     </div>
     <div class="tail">
+      <!-- FUTURE IDEA (v3.14, hidden in v3.15): "layout" in 14 languages, a slow ribbon of cards along the top of the "What we do" panel.
+         To bring it back: remove these comment marks (CSS ".langs" and the JS clone are still in place).
+      <div class="langs">
+        <ul class="langs-track" aria-label="The word layout in 14 languages">
+          <li lang="en"><i>EN</i>Layout</li>
+          <li lang="es"><i>ES</i>Maquetación</li>
+          <li lang="ja"><i>JA</i>レイアウト</li>
+          <li lang="ar" dir="rtl"><i>AR</i>تنسيق الصفحات</li>
+          <li lang="fr"><i>FR</i>Mise en page</li>
+          <li lang="ru"><i>RU</i>Вёрстка</li>
+          <li lang="zh-Hans"><i>ZH</i>排版</li>
+          <li lang="de"><i>DE</i>Schriftsatz</li>
+          <li lang="he" dir="rtl"><i>HE</i>עימוד</li>
+          <li lang="ko"><i>KO</i>편집 디자인</li>
+          <li lang="it"><i>IT</i>Impaginazione</li>
+          <li lang="th"><i>TH</i>จัดหน้า</li>
+          <li lang="pt-BR"><i>PT</i>Diagramação</li>
+          <li lang="pl"><i>PL</i>Skład</li>
+        </ul>
+      </div>
+      -->
       <div class="mini">
         <h3 class="mini-label">What we do</h3>
         <ol class="todo">
@@ -91,7 +114,9 @@
             <div><dt>Software</dt><dd>InDesign · Illustrator · Photoshop · Acrobat Pro · Word</dd></div>
             <div><dt>Scripts</dt><dd>Latin · Cyrillic · CJK · Right-to-left</dd></div>
         </dl>
-        <p class="tools-note"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 7.5L4 12l4.5 4.5M15.5 7.5L20 12l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Our own Python tools move text in and out of InDesign, Illustrator and Word files through XLIFF, so nothing is retyped.</span></p>
+        <!-- v3.18: Python tools line removed from the site (Python is mentioned only in About):
+        <p class="tools-note"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 7.5L4 12l4.5 4.5M15.5 7.5L20 12l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Our own Python tools move text in and out of InDesign, Illustrator and Word files through XLIFF, so nothing is retyped.</span></p> -->
+        <p class="tools-note closing"><span class="star" aria-hidden="true">*</span><span>Can’t see your tool or task here? Get in touch. Chances are we can still help you get it done.</span></p>
       </div>
     </div>
   </section>
@@ -100,9 +125,11 @@
     <div class="svc-main">
     <div class="wrap">
       <div class="col rv" style="--d:.05s">
-        <p class="eyebrow">02 / eLearning, audio + video</p>
+        <p class="eyebrow">02 / eLearning, audio &amp; video</p>
         <h2>eLearning,<br>audio&nbsp;&amp;&nbsp;video<br>localization.</h2>
-        <p class="lead narrow">Localizing a course means localizing every layer. Screens, interactions, narration, captions and the text inside graphics, rebuilt in Storyline, Rise and Captivate, then played end to end in every language before delivery.</p>
+        <!-- v3.23 text: <p class="lead narrow">Localizing a course means localizing every layer. Screens, interactions, narration, captions and the text inside graphics, rebuilt in Storyline, Rise and Captivate, then played end to end in every language before delivery.</p> -->
+        <!-- v3.24 text: <p class="lead narrow">Localizing a course means localizing every layer. Screens, interactions, narration, captions and the text inside graphics, rebuilt in Storyline, Rise and Captivate and checked against quality-control guidelines, so the result keeps its balance and harmony and matches the source file in its original language.</p> -->
+        <p class="lead narrow">Localizing a course means localizing every layer. Screens, interactions, narration, captions and even the text inside graphics, rebuilt in Storyline, Rise and Captivate and checked against quality-control guidelines to ensure a balanced, harmonious result that matches the source file in its original language.</p>
         <!-- Tools line hidden for now:
         <p class="fine">Built in Storyline 360, Rise 360, Captivate, Vyond, Premiere Pro and After Effects. Delivered as SCORM / xAPI packages, MP4 video and VTT / SRT captions.</p> -->
       </div>
@@ -183,7 +210,9 @@
             <div><dt>Media</dt><dd>Vyond · Premiere Pro · After Effects · Photoshop</dd></div>
             <div><dt>Formats</dt><dd>XLIFF · VTT · SRT</dd></div>
         </dl>
-        <p class="tools-note"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 7.5L4 12l4.5 4.5M15.5 7.5L20 12l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Our own Python tools compare course structure, reinject earlier translations into updated courses and time captions to audio.</span></p>
+        <!-- v3.18: Python tools line removed from the site (Python is mentioned only in About):
+        <p class="tools-note"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 7.5L4 12l4.5 4.5M15.5 7.5L20 12l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Our own Python tools compare course structure, reinject earlier translations into updated courses and time captions to audio.</span></p> -->
+        <p class="tools-note closing"><span class="star" aria-hidden="true">*</span><span>Can’t see your tool or task here? Get in touch. Chances are we can still help you get it done.</span></p>
       </div>
     </div>
   </section>
@@ -193,8 +222,11 @@
     <div class="wrap">
       <div class="col rv" style="--d:.05s">
         <p class="eyebrow">03 / About us</p>
-        <h2>Who We Are.<br><span class="soft">What We Do.</span></h2>
-        <p class="lead">We Do is a boutique DTP and eLearning localization studio for translation agencies. Founder-led, powered by our own Python tools, and working behind your brand.</p>
+        <!-- v3.17 text (replaced in v3.18): <h2>Who We Are.<br><span class="soft">What We Do.</span></h2>
+        <p class="lead">We Do is a boutique DTP and eLearning localization studio for translation agencies. Founder-led, powered by our own Python tools, and working behind your brand.</p> -->
+        <h2>The people behind<br>your files.<br><span class="soft">What We Do.</span></h2>
+        <!-- v3.23 text: <p class="lead">We Do is a DTP and eLearning localization studio that works alongside translation agencies. Founder-led and quietly behind your brand, we look after your files from the first check to the final delivery.</p> -->
+        <p class="lead">We Do is a multilingual DTP and eLearning localization studio that works alongside translation agencies. Founder-led and quietly behind your brand, we look after your files from the first check to the final delivery.</p>
         <ul class="stats"><li><b>13+ years</b><span>Localization experience</span></li><li><b>1,000+</b><span>Projects delivered</span></li><li><b>Global</b><span>Languages &amp; scripts</span></li></ul>
       </div>
       <div class="vis rv" style="--d:.15s">
@@ -211,6 +243,7 @@
     </div>
     </div>
     <div class="tail">
+      <!-- v3.18 "What you get" mini-section, replaced by "Meet Our Team" in v3.19. To bring it back: remove these comment marks.
       <div class="mini">
         <h3 class="mini-label">What you get</h3>
         <ol class="todo four">
@@ -220,13 +253,44 @@
           <li><b>Direct line</b><span>You talk to the specialist who knows your file.</span></li>
         </ol>
       </div>
+      -->
+      <!-- v3.19: Meet Our Team. Photos: square images at img/team-maxi.jpg, img/team-paulo.jpg, img/team-rodrigo.jpg (just replace the file).
+           If a photo is missing, the circle shows the initials instead. Names and roles are provisional.
+           v3.23 roles: Maximiliano "CEO &amp; Founder · eLearning &amp; DTP Lead" · Paulo "Media &amp; Video" · Rodrigo "DTP" -->
+      <div class="mini team">
+        <!-- v3.19: <h3 class="mini-label team-title">Meet Our Team</h3> -->
+        <h3 class="mini-label">About us</h3>
+        <h3 class="team-head">Meet Our Team</h3>
+        <ul class="team-list">
+          <li><span class="avatar" data-initials="MM"><img src="img/team-maxi.jpg" alt="Maximiliano Meneses" width="480" height="480" loading="lazy" onerror="this.remove()"></span><b>Maximiliano Meneses</b><span class="role">CEO &amp; Founder</span></li>
+          <li><span class="avatar" data-initials="PP"><img src="img/team-paulo.jpg" alt="Paulo Palacios" width="480" height="480" loading="lazy" onerror="this.remove()"></span><b>Paulo Palacios</b><span class="role">CEO &amp; Founder</span></li>
+          <li><span class="avatar" data-initials="RP"><img src="img/team-rodrigo.jpg" alt="Rodrigo Palacios" width="480" height="480" loading="lazy" onerror="this.remove()"></span><b>Rodrigo Palacios</b><span class="role">CEO &amp; Founder</span></li>
+        </ul>
+      </div>
       <div class="mini">
         <h3 class="mini-label">How a project runs</h3>
+        <!-- v3.21: steps now sit on a green timeline (icon in each circle). Previous markup:
         <ol class="todo four">
           <li><b>Send</b><span>Source files and the translation, in any format.</span></li>
           <li><b>Check</b><span>Fonts, scripts, links and structure reviewed before we start.</span></li>
           <li><b>Build</b><span>Layout, course or video rebuilt in the new language.</span></li>
           <li><b>Verify</b><span>Checked in the final format, in every language. Then it’s yours.</span></li>
+        </ol> -->
+        <!-- v3.23 step texts: Send "Source files and the translation, in any format." · Check "Fonts, scripts, links and structure reviewed before we start." · Build "Layout, course or video rebuilt in the new language." · Verify "Checked in the final format, in every language. Then it’s yours." -->
+        <!-- v3.26 four steps (kept for reference):
+        <ol class="todo four steps">
+          <li><i class="step-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L10.5 13.5"/><path d="M21 3l-6.5 18-4-7.5L3 9.5 21 3z"/></svg></i><b>Send</b><span>Take the first step by sending your files along with their translations, in any format you like.</span></li>
+          <li><i class="step-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></i><b>Check</b><span>We check the fonts, scripts, links and structure before we start.</span></li>
+          <li><i class="step-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8.5 20h7M12 16v4"/></svg></i><b>Build</b><span>We rebuild the layout, course or video in the new language, fitting text, audio and design together as they were in the original.</span></li>
+          <li><i class="step-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><b>Deliver</b><span>You receive your files formatted and localized, after a strict quality-control process.</span></li>
+        </ol> -->
+        <!-- v3.27: five steps; on desktop they line up under the team row like a pyramid (3 above, 5 below) -->
+        <ol class="todo five steps">
+          <li><i class="step-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L10.5 13.5"/><path d="M21 3l-6.5 18-4-7.5L3 9.5 21 3z"/></svg></i><b>Send</b><span>Take the first step by sending your files along with their translations, in any format you wish.</span></li>
+          <li><i class="step-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></i><b>Check</b><span>We check the fonts, scripts, links and structure before we start.</span></li>
+          <li><i class="step-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3h8l4 4v14h-12z"/><path d="M14.5 3v4h4"/><path d="M9.5 11.5h6M9.5 15h6M9.5 18.5h3.5"/></svg></i><b>Get a Quote</b><span>We send you a quote and a time estimate, shaped around your project’s goals.</span></li>
+          <li><i class="step-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8.5 20h7M12 16v4"/></svg></i><b>Build</b><span>We rebuild the layout, course or video in the new language, fitting text, audio and design together as they were in the original.</span></li>
+          <li><i class="step-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><b>Delivery</b><span>Get ready to receive your files, formatted and localized, after a strict quality-control process.</span></li>
         </ol>
       </div>
     </div>
@@ -236,7 +300,9 @@
     <div class="wrap rv" style="--d:.05s">
       <p class="eyebrow">Start a project</p>
       <h2 class="huge">Let’s talk.</h2>
-      <p class="lead" style="max-width:31em">Any file, any format, any language. Tell us what you need. We Do the rest.</p>
+      <!-- v3.17 text (replaced in v3.18): <p class="lead" style="max-width:31em">Any file, any format, any language. Tell us what you need. We Do the rest.</p> -->
+      <!-- v3.25 text: <p class="lead" style="max-width:31em">Got a file that needs a new language? Any file, any format, any language. Let’s take a look at it together.</p> -->
+      <p class="lead" style="max-width:31em">Got a file that needs a new language? Any file, any format, any language. Let’s take a look at it together, Contact us.</p>
       <div class="ctas">
         <button class="cta" type="button" data-chat>Start a chat</button>
         <a class="cta solid" href="mailto:YOUR_EMAIL">Email us<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -244,9 +310,16 @@
         <a class="cta" href="https://www.linkedin.com/in/maximiliano-meneses-76617916b/" target="_blank" rel="noopener">LinkedIn</a> -->
       </div>
     </div>
-    <p class="foot">© 2026 We Do — dtp &amp; ele · Santa Fe, Argentina</p>
+    <!-- v3.21 footer line: <p class="foot">© 2026 We Do — dtp &amp; ele · Santa Fe, Argentina</p> -->
+    <!-- v3.23: the legal strip moved out of this slide; it is now the page footer, right after Contact -->
   </section>
 
+  <!-- v3.23: page footer, the last tiny strip — it only shows when you scroll past "Let’s talk".
+       "Privacy policy" and "Terms of use" are plain text until those pages exist; then turn them into links. -->
+  <footer class="legal">
+    <p>© 2026 We Do — dtp &amp; ele · Santa Fe, Argentina · All rights reserved.</p>
+    <p class="legal-links"><span>Privacy policy</span><i aria-hidden="true">·</i><span>Terms of use</span></p>
+  </footer>
 </main>
 
 <nav aria-label="Sections">
@@ -271,6 +344,8 @@
     <li><button type="button" data-go="3"><small>04</small>About us</button></li>
     <li><button type="button" data-go="4"><small>05</small>Contact</button></li>
   </ul>
+  <!-- v3.26: language selector cancelled for now. Phone version (inside the 3-line menu), kept for later:
+  <div class="menu-lang"><p class="menu-lang-label">Language</p><ul class="menu-lang-list" aria-label="Language"></ul></div> -->
   <div class="menu-foot"><button type="button" class="menu-chat" data-chat>Start a chat</button><a class="menu-mail" href="mailto:YOUR_EMAIL">Email us</a></div>
 </div>
 

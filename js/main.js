@@ -1,4 +1,4 @@
-/* We Do — web v3.13 — 2026-11-03 */
+/* We Do — web v3.27 — 2026-11-04 */
 (function () {
   var sc = document.querySelector('.scroller');
   var secs = Array.prototype.slice.call(sc.querySelectorAll('section'));
@@ -15,7 +15,36 @@
   var last = secs.length - 1, active = -1, touched = false, restT;
 
   var tops = [];
+  // v3.16 continuous scroll: header and floating controls take the colours of the block right under the header
+  var themeNow = '';
+  function paintTheme() {
+    var y = sc.scrollTop + 48, idx = 0;
+    for (var k = 0; k < tops.length; k++) if (tops[k] <= y) idx = k;
+    var t = secs[idx] ? secs[idx].dataset.theme : 'light';
+    if (t !== themeNow) { themeNow = t; document.body.dataset.theme = t; }
+  }
   function measure() { tops = secs.map(function (s) { return s.offsetTop; }); }
+  /* v3.15: pinned slide + rising panel turned off (blocks scroll normally). Kept for reference:
+  // v3.14: service slides stay pinned while their "What we do" panel rises over them (only when the slide fits the screen)
+  var stacks = secs.map(function (s) { var m = s.querySelector('.svc-main'); return m && s.querySelector('.tail') ? { s: s, m: m, h: 0, cov: -1 } : null; });
+  function measure() {
+    stacks.forEach(function (st) {
+      if (!st) return;
+      st.h = st.m.offsetHeight;
+      st.s.classList.toggle('stack', window.innerWidth > 640 && st.h <= sc.clientHeight - 8);
+    });
+    tops = secs.map(function (s) { return s.offsetTop; });
+    layer();
+  }
+  function layer() {
+    var y = sc.scrollTop;
+    stacks.forEach(function (st, k) {
+      if (!st) return;
+      var c = st.s.classList.contains('stack') ? Math.max(0, Math.min(1, (y - (tops[k] || 0)) / Math.max(1, st.h))) : 0;
+      if (Math.abs(c - st.cov) > 0.002) { st.cov = c; st.m.style.setProperty('--cov', c.toFixed(3)); }
+    });
+  }
+  */
   function go(i) { measure(); sc.scrollTo({ top: tops[i], behavior: 'smooth' }); }
   // Sections can be taller than the screen (service slides + their tails): find the active one by position
   function current() {
@@ -37,7 +66,7 @@
     if (i === active) return;
     active = i;
     secs.forEach(function (s, k) { s.classList.toggle('on', k === i); });
-    document.body.dataset.theme = secs[i].dataset.theme;
+    // v3.16: the colour theme now follows the block under the header (see paintTheme), not the active block
     document.body.classList.toggle('hero-on', i === 0);
     dots.forEach(function (d, k) { if (k === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
     count.textContent = '0' + (i + 1) + ' / 0' + secs.length;
@@ -54,6 +83,7 @@
     ticking = false;
     var h = sc.clientHeight || 1;
     set(current());
+    paintTheme();
     bar.style.transform = 'scaleX(' + Math.min(1, sc.scrollTop / Math.max(1, sc.scrollHeight - h)).toFixed(4) + ')';
     if (!touched) { touched = true; bubble(); }
     if (!moving) { moving = true; document.body.classList.add('moving'); }
@@ -157,6 +187,7 @@
   Array.prototype.forEach.call(document.querySelectorAll('[data-chat]'), function (b) { b.addEventListener('click', openChat); });
 
   // Hero: the word "text" cycles through languages and scripts
+  /* v3.21 word list (kept for reference):
   var words = [['text','EN','en'],['texto','ES','es'],['テキスト','JA','ja'],['نص','AR','ar'],['текст','RU','ru'],['文本','ZH','zh-Hans'],['texte','FR','fr'],['טקסט','HE','he'],['텍스트','KO','ko'],['ข้อความ','TH','th'],['testo','IT','it'],['tekst','PL','pl']];
   var word = document.getElementById('word'), code = document.querySelector('.code'), wi = 0;
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -170,6 +201,72 @@
         word.classList.remove('pre');
       }, 260);
     }, 1800);
+  }
+
+  */
+  // v3.22: the big word says "We Do" in 13 languages; EN stays on screen a little longer.
+  // Long words shrink just enough to fit before the lamp (desktop) or inside the column (phones).
+  /* v3.22 fixed order (kept for reference):
+  var words = [['We Do','EN','en'],['Hacemos','ES','es'],['نحن نفعل','AR','ar'],['やります','JA','ja'],['Κάνουμε','EL','el'],['हम करते हैं','HI','hi'],['Facciamo','IT','it'],['우리가 합니다','KO','ko'],['Мы делаем','RU','ru'],['Vi gör','SV','sv'],['เราทำ','TH','th'],['אנחנו עושים','HE','he'],['我们来做','ZH','zh-Hans']];
+  */
+  // v3.23: "We Do" first, then 3 or 4 languages picked at random from different groups, then back to "We Do"
+  var WEDO = ['We Do','EN','en'];
+  var GROUPS = [
+    [['Hacemos','ES','es'],['Nous faisons','FR','fr'],['Facciamo','IT','it'],['Fazemos','PT-BR','pt-BR'],['Wir machen','DE','de']],
+    [['やります','JA','ja'],['우리가 합니다','KO','ko'],['我们来做','ZH','zh-Hans']],
+    [['Robimy','PL','pl'],['Vi gör','SV','sv'],['Robíme','SK','sk'],['Мы делаем','RU','ru']],
+    [['نحن نفعل','AR','ar'],['אנחנו עושים','HE','he']],
+    [['เราทำ','TH','th'],['हम करते हैं','HI','hi'],['Κάνουμε','EL','el']]
+  ];
+  var words = [WEDO].concat.apply([WEDO], GROUPS);
+  var pick = function (a) { return a[Math.floor(Math.random() * a.length)]; };
+  function newRound() {
+    var order = GROUPS.map(function (g, k) { return k; }).sort(function () { return Math.random() - 0.5; });
+    // v3.24: exactly 3 languages per round (v3.23 drew 3 or 4)
+    return order.slice(0, 3).map(function (k) { return pick(GROUPS[k]); });
+  }
+  var round = [], cur = WEDO;
+  var word = document.getElementById('word'), code = document.querySelector('.code'), wi = 0;
+  var bigBox = word.parentNode, lampStage = document.querySelector('.lamp-stage');
+  var heroSecW = word.closest('section');
+  function fitWord() {
+    word.style.fontSize = '';
+    var r = word.getBoundingClientRect(), sr = heroSecW.getBoundingClientRect();
+    var limit = Math.min(bigBox.getBoundingClientRect().right, sr.right - parseFloat(getComputedStyle(heroSecW).paddingRight));
+    if (lampStage && window.innerWidth > 640) { var L = lampStage.getBoundingClientRect(); limit = Math.min(limit, L.left + 0.62 * L.width - 28); }
+    var room = (limit - r.left) * 0.97;
+    if (r.width > room && room > 0) word.style.fontSize = (parseFloat(getComputedStyle(word).fontSize) * room / r.width).toFixed(1) + 'px';
+  }
+  function showWord(w) {
+    cur = w;
+    word.textContent = w[0]; word.lang = w[2]; code.textContent = w[1];
+    word.dir = (w[2] === 'ar' || w[2] === 'he') ? 'rtl' : 'ltr';
+    fitWord();
+  }
+  showWord(WEDO);
+  window.addEventListener('resize', fitWord);
+  if (document.fonts) {
+    // load every script's face up front, and re-fit whenever a face arrives (widths change when it swaps in)
+    words.forEach(function (w) { try { document.fonts.load('800 1em ' + getComputedStyle(document.body).fontFamily, w[0]); } catch (e) {} });
+    ['Noto Sans', 'Noto Sans Devanagari', 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', 'Noto Sans Arabic', 'Noto Sans Hebrew', 'Noto Sans Thai'].forEach(function (f, k) {
+      try { document.fonts.load('800 1em "' + f + '"', words.map(function (w) { return w[0]; }).join('')); } catch (e) {}
+    });
+    if (document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', fitWord);
+    if (document.fonts.ready) document.fonts.ready.then(fitWord);
+  }
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var nextWord = function () {
+      word.classList.add('out');
+      setTimeout(function () {
+        if (cur === WEDO) round = newRound();
+        showWord(round.length ? round.shift() : WEDO);
+        word.classList.remove('out'); word.classList.add('pre');
+        void word.offsetWidth;
+        word.classList.remove('pre');
+        setTimeout(nextWord, cur === WEDO ? 3200 : 1800);
+      }, 260);
+    };
+    setTimeout(nextWord, 3200);
   }
 
   // DTP: the green highlight jumps between scripts at random
@@ -307,13 +404,57 @@
   menuItems.forEach(function (b) { b.addEventListener('click', function () { closeMenu(); go(+b.dataset.go); }); });
   menu.querySelector('.menu-chat').addEventListener('click', function () { closeMenu(); });
   menu.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(true); });
+
+  // ---------- v3.25: language selector (v3.26: cancelled for now; markup is commented out in index.html, so this code does nothing) ----------
+  // To add a language later, add one item here (href = the page in that language). Nothing is translated yet.
+  var LANGS = [
+    { code: 'en', label: 'English', href: '' }
+  ];
+  var LANG_NOW = 'en';
+  var TICK = '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var langBtn = document.querySelector('.lang-btn'), langMenu = document.getElementById('lang-menu'), menuLangList = document.querySelector('.menu-lang-list');
+  function chooseLang(l) { if (l.code !== LANG_NOW && l.href) window.location.href = l.href; }
+  function buildLangs(list, asMenu) {
+    if (!list) return;
+    LANGS.forEach(function (l) {
+      var li = document.createElement('li'), b = document.createElement('button');
+      if (asMenu) li.setAttribute('role', 'none');
+      b.type = 'button'; b.lang = l.code; b.dataset.lang = l.code;
+      if (asMenu) { b.setAttribute('role', 'menuitemradio'); b.setAttribute('aria-checked', l.code === LANG_NOW ? 'true' : 'false'); b.tabIndex = -1; }
+      else if (l.code === LANG_NOW) b.setAttribute('aria-current', 'true');
+      b.innerHTML = '<span></span>' + (l.code === LANG_NOW ? TICK : '');
+      b.firstChild.textContent = l.label;
+      b.addEventListener('click', function () { if (asMenu) closeLang(true); else closeMenu(true); chooseLang(l); });
+      li.appendChild(b); list.appendChild(li);
+    });
+  }
+  buildLangs(langMenu, true); buildLangs(menuLangList, false);
+  var langItems = langMenu ? Array.prototype.slice.call(langMenu.querySelectorAll('button')) : [];
+  function openLang() {
+    langMenu.hidden = false; langBtn.setAttribute('aria-expanded', 'true');
+    var cur = langMenu.querySelector('[aria-checked="true"]') || langItems[0]; if (cur) cur.focus();
+  }
+  function closeLang(back) { if (!langMenu || langMenu.hidden) return; langMenu.hidden = true; langBtn.setAttribute('aria-expanded', 'false'); if (back) langBtn.focus(); }
+  if (langBtn && langMenu) {
+    langBtn.addEventListener('click', function () { if (langMenu.hidden) openLang(); else closeLang(true); });
+    langBtn.addEventListener('keydown', function (e) { if (e.key === 'ArrowDown' && langMenu.hidden) { e.preventDefault(); openLang(); } });
+    langMenu.addEventListener('keydown', function (e) {
+      var k = langItems.indexOf(document.activeElement);
+      if (e.key === 'Escape') { e.preventDefault(); closeLang(true); }
+      else if (e.key === 'ArrowDown') { e.preventDefault(); langItems[(k + 1) % langItems.length].focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); langItems[(k - 1 + langItems.length) % langItems.length].focus(); }
+      else if (e.key === 'Tab') closeLang(false);
+    });
+    document.addEventListener('click', function (e) { if (!langMenu.hidden && !langMenu.contains(e.target) && !langBtn.contains(e.target)) closeLang(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !langMenu.hidden) closeLang(true); });
+  }
   document.addEventListener('click', function (e) { if (!menu.hidden && !menu.contains(e.target) && !menuBtn.contains(e.target)) closeMenu(); });
 
   // Mini-sections fade in softly as they scroll into view (content is never hidden without JS or with reduced motion)
   var minis = Array.prototype.slice.call(document.querySelectorAll('.mini'));
   if ('IntersectionObserver' in window && !calm && minis.length) {
     minis.forEach(function (m) {
-      Array.prototype.forEach.call(m.querySelectorAll('.mini-label, .todo li, .tools > div, .tools-note'), function (el, k) { el.style.setProperty('--i', k); });
+      Array.prototype.forEach.call(m.querySelectorAll('.mini-label, .team-list li, .todo li, .tools > div, .tools-note'), function (el, k) { el.style.setProperty('--i', k); });
     });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
@@ -322,7 +463,17 @@
     minis.forEach(function (m) { io.observe(m); });
   }
 
-  requestAnimationFrame(function () { set(0); });
+  requestAnimationFrame(function () { set(0); paintTheme(); });
+  // v3.16: each block reveals its content once, as soon as it scrolls into view (and stays visible)
+  if ('IntersectionObserver' in window) {
+    var seenIO = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('seen'); seenIO.unobserve(e.target); } });
+    }, { root: sc, rootMargin: '0px 0px -12% 0px', threshold: 0 });
+    secs.forEach(function (s) { seenIO.observe(s); });
+  } else secs.forEach(function (s) { s.classList.add('seen'); });
+  // v3.14: the language ribbon loops seamlessly (second copy is hidden from screen readers)
+  var lt = document.querySelector('.langs-track');
+  if (lt) Array.prototype.slice.call(lt.children).forEach(function (li) { var cl = li.cloneNode(true); cl.setAttribute('aria-hidden', 'true'); lt.appendChild(cl); });
   // Hero v3.13: the lamp switches on once, on arrival; the headline appears in its light
   var lampHero = document.querySelector('.hero-lamp') ? document.querySelector('.hero') : null;
   if (lampHero) requestAnimationFrame(function () {
