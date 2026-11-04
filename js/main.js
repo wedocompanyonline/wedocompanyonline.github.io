@@ -1,4 +1,4 @@
-/* We Do — web v3.31 — 2026-11-04 */
+/* We Do — web v3.33 — 2026-11-04 */
 (function () {
   var sc = document.querySelector('.scroller');
   var secs = Array.prototype.slice.call(sc.querySelectorAll('section'));
@@ -141,19 +141,24 @@
       await say('Fair enough! Want a quick hello from the team? Just an email, no sales pitch.');
       if (await ask(['Sure', 'Maybe later']) === 'Maybe later') { await say('No problem. I’ll be right here if you need me.'); return; }
     } else {
+      // v3.33: straight to the point — a reaction, then "leave your email?" with Yes / No / Keep chatting
       await say({ 'An eLearning course': 'Nice, courses are our favorite.', 'A video': 'Great, video is a big part of what we do.', 'Documents & layouts': 'Perfect, multilingual layouts are our thing.' }[what]);
-      await say('How many languages?');
-      answers.languages = await ask(['1–2', '3–5', '6 or more', 'Not sure yet']);
-      await say('And when do you need it?');
-      answers.timing = await ask(['This week', 'This month', 'No rush']);
-      await say('That’s all we need to get started. No forms, no commitment.');
+      await say('Want to leave your email so we can get in touch?');
+      var next = await ask(['Yes', 'No', 'Keep chatting']);
+      if (next === 'No') { await say('No problem. I’ll be right here if you need me.'); return; }
+      if (next === 'Keep chatting') {
+        await say('Sure! How many languages?');
+        answers.languages = await ask(['1–2', '3–5', '6 or more', 'Not sure yet']);
+        await say('Perfect. Where can we send you a quote?');
+        form.hidden = false; form.querySelector('input').focus({ preventScroll: true });
+        return;
+      }
     }
     await say('Where can we reach you?');
     form.hidden = false; form.querySelector('input').focus({ preventScroll: true });
   };
   var send = async function () {
-    var summary = 'Project: ' + (answers.project || '-') + '\nLanguages: ' + (answers.languages || '-') +
-      '\nTiming: ' + (answers.timing || '-') + '\nEmail: ' + answers.email;
+    var summary = 'Project: ' + (answers.project || '-') + '\nLanguages: ' + (answers.languages || '-') + '\nEmail: ' + answers.email;
     if (CONTACT.formEndpoint) {
       try {
         var r = await fetch(CONTACT.formEndpoint, { method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -211,6 +216,7 @@
   */
   // v3.23: "We Do" first, then 3 or 4 languages picked at random from different groups, then back to "We Do"
   var WEDO = ['We Do','EN','en'];
+  /* v3.31 groups and rounds (kept for reference):
   var GROUPS = [
     [['Hacemos','ES','es'],['Nous faisons','FR','fr'],['Facciamo','IT','it'],['Fazemos','PT-BR','pt-BR'],['Wir machen','DE','de']],
     [['やります','JA','ja'],['우리가 합니다','KO','ko'],['我们来做','ZH','zh-Hans']],
@@ -224,6 +230,30 @@
     var order = GROUPS.map(function (g, k) { return k; }).sort(function () { return Math.random() - 0.5; });
     // v3.24: exactly 3 languages per round (v3.23 drew 3 or 4)
     return order.slice(0, 3).map(function (k) { return pick(GROUPS[k]); });
+  }
+  */
+  // v3.32: "We Do" + 2 languages per round, from two different families; more languages; nothing repeats from the last rounds
+  var GROUPS = [
+    [['Hacemos','ES','es'],['Nous faisons','FR','fr'],['Facciamo','IT','it'],['Fazemos','PT-BR','pt-BR'],['Noi facem','RO','ro']],
+    [['Wir machen','DE','de'],['Wij doen','NL','nl'],['Vi gör','SV','sv'],['Vi gør','DA','da'],['Vi gjør','NO','nb']],
+    [['やります','JA','ja'],['우리가 합니다','KO','ko'],['我们来做','ZH','zh-Hans']],
+    [['Robimy','PL','pl'],['Robíme','SK','sk'],['Děláme','CS','cs'],['Мы делаем','RU','ru'],['Ми робимо','UK','uk']],
+    [['نحن نفعل','AR','ar'],['אנחנו עושים','HE','he'],['ما انجام می‌دهیم','FA','fa']],
+    [['เราทำ','TH','th'],['हम करते हैं','HI','hi'],['Chúng tôi làm','VI','vi']],
+    [['Κάνουμε','EL','el'],['Biz yaparız','TR','tr'],['Megcsináljuk','HU','hu'],['Me teemme','FI','fi']]
+  ];
+  var words = [WEDO].concat.apply([WEDO], GROUPS);
+  var pick = function (a) { return a[Math.floor(Math.random() * a.length)]; };
+  var recent = [];
+  function newRound() {
+    var order = GROUPS.map(function (g, k) { return k; }).sort(function () { return Math.random() - 0.5; });
+    var out = [];
+    for (var n = 0; n < order.length && out.length < 2; n++) {
+      var fresh = GROUPS[order[n]].filter(function (w) { return recent.indexOf(w) < 0; });
+      if (fresh.length) out.push(pick(fresh));
+    }
+    recent = recent.concat(out).slice(-8);
+    return out;
   }
   var round = [], cur = WEDO;
   var word = document.getElementById('word'), code = document.querySelector('.code'), wi = 0;
@@ -241,7 +271,7 @@
   function showWord(w) {
     cur = w;
     word.textContent = w[0]; word.lang = w[2]; code.textContent = w[1];
-    word.dir = (w[2] === 'ar' || w[2] === 'he') ? 'rtl' : 'ltr';
+    word.dir = (w[2] === 'ar' || w[2] === 'he' || w[2] === 'fa') ? 'rtl' : 'ltr';
     fitWord();
   }
   showWord(WEDO);

@@ -38,7 +38,7 @@
     <div class="hero-art" aria-hidden="true"><div class="hero-stage"><div class="hero-zoom"><img src="img/hero-bg.jpg" alt="" width="1821" height="864"><i class="hero-flare"></i><span class="hero-stars"></span></div></div><span class="hero-dust"></span><i class="meteor"></i></div>
     -->
     <!-- Hero v3.13: product-style photo — the lamp switches on and lights the headline -->
-    <div class="hero-lamp" aria-hidden="true"><div class="lamp-stage"><div class="lamp-zoom"><img src="img/hero-lamp.jpg" alt="" width="1376" height="768"><i class="lamp-off"><i class="lamp-lens"></i></i></div></div></div>
+    <div class="hero-lamp" aria-hidden="true"><div class="lamp-stage"><div class="lamp-zoom"><img src="img/hero-lamp.jpg" alt="" width="1376" height="768"><img class="lamp-off lamp-off-photo" src="img/hero-lamp-off.jpg" alt="" width="1376" height="768"><!-- v3.33: real "switched off" photo; before it was painted over in CSS: <i class="lamp-off"><i class="lamp-lens"></i></i> --></div></div></div>
     <div class="wrap">
       <div class="tag rv"><span class="code">EN</span></div>
       <div class="big rv" style="--d:.08s"><span id="word" lang="en">We Do</span></div>
@@ -111,7 +111,8 @@
       <div class="mini">
         <h3 class="mini-label">Tools</h3>
         <dl class="tools">
-            <div><dt>Software</dt><dd>InDesign · Illustrator · Photoshop · Acrobat Pro · Word</dd></div>
+            <!-- v3.31: <dd>InDesign · Illustrator · Photoshop · Acrobat Pro · Word</dd> -->
+            <div><dt>Software</dt><dd>InDesign · Illustrator · Photoshop · Acrobat&nbsp;Pro · Microsoft&nbsp;Word · PowerPoint · Excel · Figma · Canva</dd></div>
             <div><dt>Scripts</dt><dd>Latin · Cyrillic · CJK · Right-to-left</dd></div>
         </dl>
         <!-- v3.18: Python tools line removed from the site (Python is mentioned only in About):
@@ -197,17 +198,18 @@
         <ol class="todo">
             <li><b>Course localization</b><span>Storyline, Rise and Captivate courses, from XLIFF to published output.</span></li>
             <li><b>Screens &amp; interactions</b><span>Buttons, layers, states and triggers fitted to the new text.</span></li>
-            <li><b>Audio editing &amp; text-to-speech</b><span>Narration generated, edited and retimed to the animation.</span></li>
+            <li><b>Audio editing &amp; text-to-speech</b><span>Narration generated, edited and retimed to the&nbsp;animation.</span></li>
             <li><b>Transcription &amp; subtitles</b><span>Transcripts, VTT and SRT files timed to the audio, sidecar or burned in.</span></li>
-            <li><b>Video &amp; animation</b><span>Vyond and After Effects scenes retimed and re-texted.</span></li>
+            <li><b>Video &amp; animation</b><span>Vyond and After Effects scenes retimed and <span class="nw">re-texted.</span></span></li>
             <li><b>Graphics</b><span>Text inside images and screenshots recreated.</span></li>
         </ol>
       </div>
       <div class="mini">
         <h3 class="mini-label">Tools</h3>
         <dl class="tools">
-            <div><dt>Authoring</dt><dd>Articulate Storyline 360 · Rise · Adobe Captivate</dd></div>
-            <div><dt>Media</dt><dd>Vyond · Premiere Pro · After Effects · Photoshop</dd></div>
+            <div><dt>Authoring</dt><dd>Articulate&nbsp;Storyline&nbsp;360 · Rise · Adobe&nbsp;Captivate</dd></div>
+            <!-- v3.31: <div><dt>Media</dt><dd>Vyond · Premiere Pro · After Effects · Photoshop</dd></div> -->
+            <div><dt>Media &amp; Video</dt><dd>Adobe&nbsp;Premiere&nbsp;Pro · After&nbsp;Effects · Subtitle&nbsp;Edit · Vyond · Google&nbsp;Vids</dd></div>
             <!-- v3.28: removed from the site: <div><dt>Formats</dt><dd>XLIFF · VTT · SRT</dd></div> -->
         </dl>
         <!-- v3.18: Python tools line removed from the site (Python is mentioned only in About):
@@ -228,7 +230,7 @@
         <h2>The people<br>behind your files.<br><span class="soft">What We Do.</span></h2>
         <!-- v3.23 text: <p class="lead">We Do is a DTP and eLearning localization studio that works alongside translation agencies. Founder-led and quietly behind your brand, we look after your files from the first check to the final delivery.</p> -->
         <p class="lead">We Do is a multilingual DTP and eLearning localization studio that works alongside translation agencies. Founder-led and quietly behind your brand, we look after your files from the first check to the final delivery.</p>
-        <ul class="stats"><li><b>13+ years</b><span>Localization experience</span></li><li><b>1,000+</b><span>Projects delivered</span></li><li><b>Global</b><span>Languages &amp; scripts</span></li></ul>
+        <ul class="stats"><li><b>13+ years</b><span>Localization experience</span></li><!-- v3.31 stat: 1,000+ / Projects delivered --><!-- v3.32 stat: Strict QA --><li><b>Quality Assurance</b><span>Quality control on every file</span></li><li><b>Global</b><span>Languages &amp; scripts</span></li></ul>
       </div>
       <div class="vis rv" style="--d:.15s">
         <div class="about-art"><img src="img/about-mascot.jpg" alt="The We Do mascot, a small black robot with the WD logo, hugging a globe" width="810" height="585"><i class="eye-glow" aria-hidden="true"></i></div>

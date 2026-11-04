@@ -1,4 +1,4 @@
-/* We Do — web v3.31 — 2026-11-04 */
+/* We Do — web v3.33 — 2026-11-04 */
 :root{--ink:#16181D;--paper:#F4F5F3;--mint:#5EC4B0;--teal:#1A8A78;--teal-d:#136A5C;--mute-d:#A3ADAA;--mute-l:#565E5B;--mute-m:#1F3D37;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --fg:#fff;--muted:var(--mute-d);--accent:var(--mint);--line:rgba(255,255,255,.24);--dot:rgba(255,255,255,.32);--bub-bg:#fff;--bub-fg:var(--ink);--count-bg:var(--mint);--count-fg:var(--ink);--cta-bg:var(--mint);--cta-fg:var(--ink)}
@@ -616,4 +616,16 @@ body.foot-in .pet{transform:translateY(calc(-1 * var(--foot-h,0px)))}
 /* v3.30 — phones only: the lamp comes in big from the top right, so its light falls on the headline (base fades out below) */
 /* v3.30 (lamp cropped at the bottom): @media (max-width:640px){.lamp-stage{--lh:74vh;height:var(--lh);width:calc(var(--lh) * 1.7917);top:calc(70px - var(--lh) * .08);bottom:auto;right:auto;left:calc(66vw - var(--lh) * 1.111);-webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent);mask-image:linear-gradient(to bottom,#000 70%,transparent)}} */
 /* v3.31 — phones only: the whole lamp, top right, its light on the headline; soft fade only at the image edges */
-@media (max-width:640px){.lamp-stage{--lh:min(46vh,108vw);height:var(--lh);width:calc(var(--lh) * 1.7917);top:calc(70px - var(--lh) * .11);bottom:auto;right:auto;left:calc(99vw - var(--lh) * 1.46);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 10%,#000 93%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 10%,#000 93%,transparent 100%)}}
+/* v3.32: phone lamp back to the v3.29 layout (lamp below the text). v3.31 rule kept for reference:
+@media (max-width:640px){.lamp-stage{--lh:min(46vh,108vw);height:var(--lh);width:calc(var(--lh) * 1.7917);top:calc(70px - var(--lh) * .11);bottom:auto;right:auto;left:calc(99vw - var(--lh) * 1.46);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 10%,#000 93%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 10%,#000 93%,transparent 100%)}} */
+/* v3.32 — title numbers in the label typeface ("What we do"), at the size they have now */
+.todo b::before{font-family:var(--mono);font-weight:500;letter-spacing:.02em}
+/* v3.32 — "Get in touch" without underline (underline only on hover) */
+.tools-note .touch{text-decoration:none}
+.tools-note .touch:hover{text-decoration:underline}
+.nw{white-space:nowrap}
+#word:lang(fa){font-family:'Noto Sans Arabic',sans-serif;letter-spacing:0} /* v3.32: Persian */
+/* v3.33 — the "off" state is now a real photo of the switched-off lamp, laid exactly over the lit one (same framing) */
+.lamp-off.lamp-off-photo{display:block;width:100%;height:100%;background:none}
+/* v3.33 — phones: the middle stat ("Quality Assurance") gets a wider column so the long word never runs into the next one */
+@media (max-width:640px){.stats{grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr) minmax(0,.85fr)}}
