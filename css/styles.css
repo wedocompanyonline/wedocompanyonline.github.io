@@ -1,4 +1,4 @@
-/* We Do — web v3.29 — 2026-11-04 */
+/* We Do — web v3.30 — 2026-11-04 */
 :root{--ink:#16181D;--paper:#F4F5F3;--mint:#5EC4B0;--teal:#1A8A78;--teal-d:#136A5C;--mute-d:#A3ADAA;--mute-l:#565E5B;--mute-m:#1F3D37;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --fg:#fff;--muted:var(--mute-d);--accent:var(--mint);--line:rgba(255,255,255,.24);--dot:rgba(255,255,255,.32);--bub-bg:#fff;--bub-fg:var(--ink);--count-bg:var(--mint);--count-fg:var(--ink);--cta-bg:var(--mint);--cta-fg:var(--ink)}
@@ -603,3 +603,15 @@ header .hbtns .lang-btn:hover,header .hbtns .lang-btn[aria-expanded=true]{backgr
 .legal-links{display:flex;flex-wrap:wrap;align-items:center}
 @media (max-width:640px){.legal{padding:12px 24px;font-size:11px}.legal i{margin:0 7px}}
 body.foot-in .pet{transform:translateY(calc(-1 * var(--foot-h,0px)))}
+/* v3.30 — footer: one line on computers (as in v3.28), two lines only on phones */
+@media (min-width:641px){.legal{flex-direction:row;align-items:center;justify-content:space-between;gap:4px 24px}}
+/* v3.30 — numbers the same size as their title, in green */
+.todo b::before{font-family:inherit;font-size:1em;font-weight:700;letter-spacing:0;vertical-align:baseline;margin-right:.45em;font-variant-numeric:tabular-nums}
+/* v3.30 — step texts centred with balanced lines (no stretched word gaps), in a compact square-ish box */
+@media (min-width:901px){.steps.five li span{text-align:center;text-align-last:auto;-webkit-hyphens:manual;hyphens:manual;text-wrap:balance;max-width:15em}}
+/* v3.30 — "Get in touch" in classic link blue */
+.tools-note .touch{color:#1F5FD1;text-decoration-color:currentColor}
+.dark .tools-note .touch{color:#7FB0FF;text-decoration-color:currentColor}
+.tools-note .touch:hover,.dark .tools-note .touch:hover{color:inherit}
+/* v3.30 — phones only: the lamp comes in big from the top right, so its light falls on the headline (base fades out below) */
+@media (max-width:640px){.lamp-stage{--lh:74vh;height:var(--lh);width:calc(var(--lh) * 1.7917);top:calc(70px - var(--lh) * .08);bottom:auto;right:auto;left:calc(66vw - var(--lh) * 1.111);-webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent);mask-image:linear-gradient(to bottom,#000 70%,transparent)}}

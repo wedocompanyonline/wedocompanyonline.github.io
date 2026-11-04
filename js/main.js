@@ -1,4 +1,4 @@
-/* We Do — web v3.29 — 2026-11-04 */
+/* We Do — web v3.30 — 2026-11-04 */
 (function () {
   var sc = document.querySelector('.scroller');
   var secs = Array.prototype.slice.call(sc.querySelectorAll('section'));
@@ -233,7 +233,8 @@
     word.style.fontSize = '';
     var r = word.getBoundingClientRect(), sr = heroSecW.getBoundingClientRect();
     var limit = Math.min(bigBox.getBoundingClientRect().right, sr.right - parseFloat(getComputedStyle(heroSecW).paddingRight));
-    if (lampStage && window.innerWidth > 640) { var L = lampStage.getBoundingClientRect(); limit = Math.min(limit, L.left + 0.62 * L.width - 28); }
+    // v3.30: keep clear of the lamp head wherever it sits level with the word (desktop, and phones since the lamp moved up)
+    if (lampStage) { var L = lampStage.getBoundingClientRect(), hT = L.top + 0.11 * L.height, hB = L.top + 0.42 * L.height; if (r.bottom > hT && r.top < hB) limit = Math.min(limit, L.left + 0.62 * L.width - (window.innerWidth > 640 ? 28 : 10)); }
     var room = (limit - r.left) * 0.97;
     if (r.width > room && room > 0) word.style.fontSize = (parseFloat(getComputedStyle(word).fontSize) * room / r.width).toFixed(1) + 'px';
   }
