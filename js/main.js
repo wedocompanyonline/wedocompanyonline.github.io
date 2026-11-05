@@ -1,4 +1,4 @@
-/* We Do — web v3.33 — 2026-11-04 */
+/* We Do — web v3.37 — 2026-11-05 */
 (function () {
   var sc = document.querySelector('.scroller');
   var secs = Array.prototype.slice.call(sc.querySelectorAll('section'));
